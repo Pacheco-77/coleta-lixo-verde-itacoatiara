@@ -1,0 +1,318 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    border-color: theme('colors.gray.200');
+  }
+
+  body {
+    background-color: theme('colors.white');
+    color: theme('colors.gray.900');
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  /* Custom scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background-color: theme('colors.gray.100');
+    border-radius: theme('borderRadius.DEFAULT');
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: theme('colors.gray.300');
+    border-radius: theme('borderRadius.DEFAULT');
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: theme('colors.gray.400');
+  }
+
+  /* Leaflet map container */
+  .leaflet-container {
+    height: 100%;
+    width: 100%;
+    border-radius: theme('borderRadius.lg');
+  }
+
+  /* Custom animations */
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+    background: linear-gradient(
+      to right,
+      #f6f7f8 0%,
+      #edeef1 20%,
+      #f6f7f8 40%,
+      #f6f7f8 100%
+    );
+    background-size: 800px 104px;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -468px 0;
+    }
+    100% {
+      background-position: 468px 0;
+    }
+  }
+
+  /* Card hover effect */
+  .card-hover {
+    transition: all 0.3s ease;
+  }
+
+  .card-hover:hover {
+    box-shadow: theme('boxShadow.lg');
+    transform: translateY(-4px);
+  }
+
+  /* Status badges */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.625rem;
+    border-radius: theme('borderRadius.full');
+    font-size: theme('fontSize.xs');
+    font-weight: theme('fontWeight.medium');
+  }
+
+  .status-pending {
+    background-color: theme('colors.yellow.100');
+    color: theme('colors.yellow.800');
+  }
+
+  .status-scheduled {
+    background-color: theme('colors.blue.100');
+    color: theme('colors.blue.800');
+  }
+
+  .status-in_progress {
+    background-color: theme('colors.purple.100');
+    color: theme('colors.purple.800');
+  }
+
+  .status-collected {
+    background-color: theme('colors.green.100');
+    color: theme('colors.green.800');
+  }
+
+  .status-cancelled {
+    background-color: theme('colors.red.100');
+    color: theme('colors.red.800');
+  }
+
+  .status-completed {
+    background-color: theme('colors.green.100');
+    color: theme('colors.green.800');
+  }
+
+  /* Priority badges */
+  .priority-low {
+    background-color: theme('colors.gray.100');
+    color: theme('colors.gray.800');
+  }
+
+  .priority-normal {
+    background-color: theme('colors.blue.100');
+    color: theme('colors.blue.800');
+  }
+
+  .priority-high {
+    background-color: theme('colors.orange.100');
+    color: theme('colors.orange.800');
+  }
+
+  .priority-urgent {
+    background-color: theme('colors.red.100');
+    color: theme('colors.red.800');
+  }
+
+  /* Form styles */
+  .form-label {
+    display: block;
+    font-size: theme('fontSize.sm');
+    font-weight: theme('fontWeight.medium');
+    color: theme('colors.gray.700');
+    margin-bottom: 0.25rem;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid theme('colors.gray.300');
+    border-radius: theme('borderRadius.lg');
+    transition: all 0.2s;
+  }
+
+  .form-input:focus {
+    outline: none;
+    ring: 2px;
+    ring-color: theme('colors.green.500');
+    border-color: transparent;
+  }
+
+  .form-error {
+    font-size: theme('fontSize.sm');
+    color: theme('colors.red.600');
+    margin-top: 0.25rem;
+  }
+
+  /* Button variants */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    border-radius: theme('borderRadius.lg');
+    font-weight: theme('fontWeight.medium');
+    transition: all 0.2s;
+  }
+
+  .btn:focus {
+    outline: none;
+    ring: 2px;
+    ring-offset: 2px;
+  }
+
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .btn-primary {
+    background-color: theme('colors.green.600');
+    color: theme('colors.white');
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background-color: theme('colors.green.700');
+  }
+
+  .btn-primary:focus {
+    ring-color: theme('colors.green.500');
+  }
+
+  .btn-secondary {
+    background-color: theme('colors.gray.200');
+    color: theme('colors.gray.900');
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background-color: theme('colors.gray.300');
+  }
+
+  .btn-secondary:focus {
+    ring-color: theme('colors.gray.500');
+  }
+
+  .btn-danger {
+    background-color: theme('colors.red.600');
+    color: theme('colors.white');
+  }
+
+  .btn-danger:hover:not(:disabled) {
+    background-color: theme('colors.red.700');
+  }
+
+  .btn-danger:focus {
+    ring-color: theme('colors.red.500');
+  }
+
+  .btn-success {
+    background-color: theme('colors.green.600');
+    color: theme('colors.white');
+  }
+
+  .btn-success:hover:not(:disabled) {
+    background-color: theme('colors.green.700');
+  }
+
+  .btn-success:focus {
+    ring-color: theme('colors.green.500');
+  }
+
+  .btn-outline {
+    border: 2px solid theme('colors.green.600');
+    color: theme('colors.green.600');
+    background-color: transparent;
+  }
+
+  .btn-outline:hover:not(:disabled) {
+    background-color: theme('colors.green.50');
+  }
+
+  .btn-outline:focus {
+    ring-color: theme('colors.green.500');
+  }
+
+  /* Loading spinner */
+  .spinner {
+    animation: spin 1s linear infinite;
+    border-radius: theme('borderRadius.full');
+    border: 2px solid theme('colors.gray.300');
+    border-top-color: theme('colors.green.600');
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Skeleton loading */
+  .skeleton {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    background-color: theme('colors.gray.200');
+    border-radius: theme('borderRadius.DEFAULT');
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  /* Glass morphism effect */
+  .glass {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* Gradient backgrounds */
+  .gradient-primary {
+    background-image: linear-gradient(to right, theme('colors.green.600'), theme('colors.green.700'));
+  }
+
+  .gradient-success {
+    background-image: linear-gradient(to right, theme('colors.green.600'), theme('colors.green.700'));
+  }
+
+  .gradient-danger {
+    background-image: linear-gradient(to right, theme('colors.red.600'), theme('colors.red.700'));
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
