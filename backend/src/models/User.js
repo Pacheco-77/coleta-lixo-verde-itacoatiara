@@ -202,7 +202,7 @@ const userSchema = new mongoose.Schema({
 });
 
 // Índices
-userSchema.index({ email: 1 });
+// `email` já tem `unique: true` na definição do campo; evitar definição duplicada de índice
 userSchema.index({ role: 1 });
 userSchema.index({ 'address.location': '2dsphere' });
 userSchema.index({ 'collectorInfo.lastLocation': '2dsphere' });
