@@ -16,7 +16,7 @@ const ProfilePage = () => {
     switch (user?.role) {
       case 'admin': return '/admin/dashboard';
       case 'coletor': return '/coletor/dashboard';
-      case 'user': return '/cidadao/dashboard';
+      case 'user': return '/usuario/dashboard';
       default: return '/';
     }
   };

@@ -45,7 +45,7 @@ const LoginPage = () => {
           navigate('/coletor/dashboard');
           break;
         case 'user':
-          navigate('/cidadao/dashboard');
+          navigate('/usuario/dashboard');
           break;
         default:
           navigate('/');
