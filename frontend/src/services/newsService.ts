@@ -1,5 +1,5 @@
 import axios from '@/lib/axios';
-import { News, NewsFormData } from '@/types';
+import { NewsFormData } from '@/types';
 
 /**
  * Serviço para gerenciamento de notícias (Admin)

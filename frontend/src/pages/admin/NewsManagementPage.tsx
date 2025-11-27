@@ -5,9 +5,9 @@ import { toast } from 'sonner';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import newsService from '@/services/newsService';
-import { News, NewsFormData } from '@/types';
+import { News, NewsFormData, NewsCategory } from '@/types';
 import Button from '@/components/ui/Button';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
+import { Card, CardContent } from '@/components/ui/Card';
 import Modal from '@/components/ui/Modal';
 import Loading from '@/components/ui/Loading';
 import AdminLayout from '@/components/layout/AdminLayout';
@@ -96,7 +96,7 @@ const NewsManagementPage = () => {
       content: formData.get('content') as string,
       summary: formData.get('summary') as string,
       image: formData.get('image') as string,
-      category: formData.get('category') as any,
+      category: formData.get('category') as NewsCategory,
       priority: parseInt(formData.get('priority') as string) || 1,
       publishDate: formData.get('publishDate') as string,
       expiryDate: formData.get('expiryDate') as string || undefined,

@@ -1,7 +1,6 @@
-import { Fragment, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { X } from 'lucide-react';
 import { cn } from '@/utils/cn';
-import Button from './Button';
 
 interface ModalProps {
   isOpen: boolean;
@@ -51,6 +50,9 @@ const Modal = ({
               {title && <h3 className="text-lg font-semibold text-gray-900">{title}</h3>}
               {showCloseButton && (
                 <button
+                  type="button"
+                  aria-label="Fechar"
+                  title="Fechar"
                   onClick={onClose}
                   className="text-gray-400 hover:text-gray-600 transition-colors"
                 >

@@ -1,6 +1,6 @@
 const News = require('../models/News');
 const CollectionPoint = require('../models/CollectionPoint');
-const Route = require('../models/Route');
+// Route model not needed in public controller (removed to avoid unused variable)
 const User = require('../models/User');
 const logger = require('../utils/logger');
 
@@ -291,7 +291,7 @@ exports.getContactInfo = async (req, res) => {
  */
 exports.sendContactMessage = async (req, res) => {
   try {
-    const { name, email, phone, subject, message } = req.body;
+    const { name, email, message } = req.body;
 
     // Validar campos obrigatórios
     if (!name || !email || !message) {

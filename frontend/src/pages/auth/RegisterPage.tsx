@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
+import { handleApiError } from '@/lib/axios';
 import { Mail, Lock, User, Phone, Leaf } from 'lucide-react';
 import { registerSchema } from '@/utils/validation';
 import { authService } from '@/services/authService';
@@ -10,6 +11,7 @@ import { useAuthStore } from '@/store/authStore';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import { z } from 'zod';
+import { RegisterData } from '@/types';
 
 type RegisterFormData = z.infer<typeof registerSchema>;
 
@@ -29,14 +31,20 @@ const RegisterPage = () => {
   const onSubmit = async (data: RegisterFormData) => {
     try {
       setIsLoading(true);
-      const { confirmPassword, ...registerData } = data;
+      const registerData: RegisterData = {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        phone: data.phone,
+      };
+
       const response = await authService.register(registerData);
       
       setAuth(response.user, response.token, response.refreshToken);
       toast.success('Cadastro realizado com sucesso!');
       navigate('/cidadao/dashboard');
-    } catch (error: any) {
-      toast.error(error.response?.data?.message || 'Erro ao fazer cadastro');
+    } catch (error: unknown) {
+      toast.error(handleApiError(error));
     } finally {
       setIsLoading(false);
     }
