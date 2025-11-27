@@ -131,3 +131,4 @@ public
 # Misc
 .vercel
 .netlify
+.env*.local
