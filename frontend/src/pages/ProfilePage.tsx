@@ -15,8 +15,8 @@ const ProfilePage = () => {
   const getDashboardLink = () => {
     switch (user?.role) {
       case 'admin': return '/admin/dashboard';
-      case 'collector': return '/coletor/dashboard';
-      case 'citizen': return '/cidadao/dashboard';
+      case 'coletor': return '/coletor/dashboard';
+      case 'user': return '/cidadao/dashboard';
       default: return '/';
     }
   };

@@ -184,7 +184,7 @@ export interface Report {
   description?: string;
   startDate: string;
   endDate: string;
-  data: any;
+  data: unknown;
   generatedBy: string;
   generatedAt: string;
   format?: 'pdf' | 'excel' | 'csv';
@@ -234,7 +234,7 @@ export interface AuthResponse {
 }
 
 // API Response Types
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   message?: string;
   data?: T;

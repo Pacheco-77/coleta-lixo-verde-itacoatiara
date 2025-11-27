@@ -4,7 +4,7 @@ const Route = require('../models/Route');
 const CheckIn = require('../models/CheckIn');
 const Report = require('../models/Report');
 const logger = require('../utils/logger');
-const { emitToAdmins, emitToCollectors, emitToUser } = require('../config/socket');
+const { emitToUser } = require('../config/socket');
 const { calculateDistance, optimizeRoute } = require('../utils/helpers');
 
 // Dashboard - Estatísticas gerais
@@ -579,7 +579,7 @@ exports.deleteRoute = async (req, res) => {
 // Relatórios detalhados
 exports.getReports = async (req, res) => {
   try {
-    const { type, startDate, endDate, collector, neighborhood } = req.query;
+    const { type, startDate, endDate, collector } = req.query;
 
     const filter = {};
     if (type) filter.type = type;

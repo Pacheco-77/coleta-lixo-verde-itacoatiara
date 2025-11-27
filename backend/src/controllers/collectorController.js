@@ -5,7 +5,6 @@ const User = require('../models/User');
 const { AppError } = require('../middleware/errorHandler');
 const logger = require('../utils/logger');
 const { emitToAdmins, emitToUser } = require('../config/socket');
-const { calculateDistance } = require('../utils/helpers');
 
 // @desc    Obter rota atual do coletor
 // @route   GET /api/collector/current-route

@@ -36,7 +36,7 @@ api.interceptors.response.use(
   (response) => {
     return response;
   },
-  async (error: AxiosError<any>) => {
+  async (error: AxiosError<unknown>) => {
     const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
 
     // Handle 401 Unauthorized
@@ -74,11 +74,8 @@ api.interceptors.response.use(
       }
     }
 
-    // Handle other errors
-    const errorMessage = error.response?.data?.message || 
-                        error.response?.data?.error || 
-                        error.message || 
-                        'Ocorreu um erro inesperado';
+    // Handle other errors using helper to safely extract message
+    const errorMessage = handleApiError(error);
 
     // Show error toast for non-401 errors
     if (error.response?.status !== 401) {
@@ -92,11 +89,14 @@ api.interceptors.response.use(
 // Helper function to handle API errors
 export const handleApiError = (error: unknown): string => {
   if (axios.isAxiosError(error)) {
-    const axiosError = error as AxiosError<any>;
-    return axiosError.response?.data?.message || 
-           axiosError.response?.data?.error || 
-           axiosError.message || 
-           'Ocorreu um erro inesperado';
+    const axiosError = error as AxiosError<unknown>;
+    const data = axiosError.response?.data;
+    if (data && typeof data === 'object') {
+      const obj = data as Record<string, unknown>;
+      const maybeMessage = obj['message'] ?? obj['error'];
+      if (maybeMessage) return String(maybeMessage);
+    }
+    return axiosError.message || 'Ocorreu um erro inesperado';
   }
   
   if (error instanceof Error) {

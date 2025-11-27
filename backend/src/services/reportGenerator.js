@@ -213,7 +213,6 @@ const generateExcelReport = async (data, options = {}) => {
     await ensureReportsDir();
 
     const {
-      title = 'Relatório Coleta Verde',
       sheets = [],
     } = options;
 

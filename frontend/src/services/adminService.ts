@@ -96,11 +96,11 @@ export const adminService = {
     return response.data;
   },
 
-  generateReport: async (data: {
+    generateReport: async (data: {
     type: string;
     startDate: string;
     endDate: string;
-    filters?: Record<string, any>;
+    filters?: Record<string, unknown>;
   }): Promise<Report> => {
     const response = await api.post<ApiResponse<Report>>('/api/admin/reports/generate', data);
     return response.data.data!;
@@ -118,7 +118,7 @@ export const adminService = {
     startDate?: string;
     endDate?: string;
     groupBy?: 'day' | 'week' | 'month';
-  }): Promise<any[]> => {
+  }): Promise<Record<string, unknown>[]> => {
     const response = await api.get('/api/admin/performance', { params });
     return response.data.data!;
   },

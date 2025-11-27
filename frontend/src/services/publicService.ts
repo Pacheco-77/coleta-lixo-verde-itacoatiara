@@ -1,5 +1,5 @@
 import axios from '@/lib/axios';
-import { News, PublicStatistics, ContactInfo, CollectionPoint } from '@/types';
+import { PublicStatistics, ContactInfo } from '@/types';
 
 /**
  * Serviço para APIs públicas (sem autenticação)

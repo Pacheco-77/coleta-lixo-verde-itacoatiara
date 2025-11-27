@@ -1,15 +1,17 @@
 import { useState } from 'react';
+import { z } from 'zod';
 import { useNavigate, Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
+import { handleApiError } from '@/lib/axios';
 import { Mail, Lock, Leaf } from 'lucide-react';
 import { loginSchema } from '@/utils/validation';
 import { authService } from '@/services/authService';
 import { useAuthStore } from '@/store/authStore';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
-import { z } from 'zod';
+
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
@@ -39,17 +41,17 @@ const LoginPage = () => {
         case 'admin':
           navigate('/admin/dashboard');
           break;
-        case 'collector':
+        case 'coletor':
           navigate('/coletor/dashboard');
           break;
-        case 'citizen':
+        case 'user':
           navigate('/cidadao/dashboard');
           break;
         default:
           navigate('/');
       }
-    } catch (error: any) {
-      toast.error(error.response?.data?.message || 'Erro ao fazer login');
+    } catch (error: unknown) {
+      toast.error(handleApiError(error));
     } finally {
       setIsLoading(false);
     }
