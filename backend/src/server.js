@@ -1,6 +1,15 @@
 // Carregar variáveis de ambiente
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
+const envPath = path.join(__dirname, '..', '.env');
+require('dotenv').config({ path: envPath });
+
+// Verificar se variáveis críticas estão carregadas
+if (!process.env.MONGODB_URI) {
+  console.error('❌ ERRO: MONGODB_URI não foi carregado do arquivo .env');
+  console.error('   Arquivo .env procurado em:', envPath);
+  console.error('   Arquivo existe?', require('fs').existsSync(envPath));
+  process.exit(1);
+}
 
 const express = require('express');
 const http = require('http');
