@@ -104,6 +104,9 @@ const authLimiter = rateLimit({
   },
 });
 
+// Favicon (evitar erro 404)
+app.get('/favicon.ico', (req, res) => res.status(204).end());
+
 // Health check
 app.get('/health', (req, res) => {
   res.status(200).json({
