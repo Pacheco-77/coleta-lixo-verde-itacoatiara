@@ -1,13 +1,16 @@
 // Carregar variáveis de ambiente
-const path = require('path');
-const envPath = path.join(__dirname, '..', '.env');
-require('dotenv').config({ path: envPath });
+// Em produção (Render), as variáveis vêm do painel. Em desenvolvimento, do arquivo .env
+if (process.env.NODE_ENV !== 'production') {
+  const path = require('path');
+  const envPath = path.join(__dirname, '..', '.env');
+  require('dotenv').config({ path: envPath });
+}
 
 // Verificar se variáveis críticas estão carregadas
 if (!process.env.MONGODB_URI) {
-  console.error('❌ ERRO: MONGODB_URI não foi carregado do arquivo .env');
-  console.error('   Arquivo .env procurado em:', envPath);
-  console.error('   Arquivo existe?', require('fs').existsSync(envPath));
+  console.error('❌ ERRO: MONGODB_URI não está configurado');
+  console.error('   Em desenvolvimento: verifique o arquivo .env');
+  console.error('   Em produção: configure as variáveis de ambiente no Render');
   process.exit(1);
 }
 
