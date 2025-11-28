@@ -3,6 +3,11 @@ const logger = require('../utils/logger');
 
 const connectDB = async () => {
   try {
+    // Verificar se MONGODB_URI está definido
+    if (!process.env.MONGODB_URI) {
+      throw new Error('MONGODB_URI não está definido no arquivo .env');
+    }
+
     // Mongoose v6+ no longer requires these options; pass the connection string only
     const conn = await mongoose.connect(process.env.MONGODB_URI);
 
