@@ -9,8 +9,8 @@ import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 
 // Public Pages
-import HomePage from '@/pages/public/HomePage';
-import PublicMapPage from '@/pages/public/PublicMapPage';
+import HomePage from './pages/public/HomePage'
+import PublicMapPage from './pages/public/PublicMapPage'
 
 // Citizen Pages
 import CitizenDashboard from './pages/citizen/CitizenDashboard';
