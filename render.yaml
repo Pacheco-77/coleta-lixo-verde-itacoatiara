@@ -5,7 +5,8 @@ services:
     runtime: node
     region: oregon
     plan: free
-    buildCommand: cd backend && npm install
+    nodeVersion: 20.19.6
+    buildCommand: cd backend && npm ci
     startCommand: cd backend && npm start
     healthCheckPath: /health
     envVars:
@@ -66,7 +67,8 @@ services:
     runtime: static
     region: oregon
     plan: free
-    buildCommand: cd frontend && npm install && npm run build
+    nodeVersion: 20.19.6
+    buildCommand: cd frontend && npm ci && npm run build
     staticPublishPath: frontend/dist
     pullRequestPreviewsEnabled: true
     headers:
