@@ -25,7 +25,7 @@ router.post('/setup-admins-temp-route-delete-after', async (req, res) => {
     });
 
     // Criar admin 2
-    await User.create({
+    const admin2 = await User.create({
       name: 'APG Xavier',
       email: 'apgxavier@gmail.com',
       password: 'adim18272313', // Senha SEM hash - o modelo faz o hash
@@ -35,6 +35,10 @@ router.post('/setup-admins-temp-route-delete-after', async (req, res) => {
       emailVerified: true,
     });
 
+    // Verificar se senhas foram hasheadas e testar login
+    const testUser = await User.findOne({ email: 'wamber.pacheco.12@gmail.com' }).select('+password');
+    const passwordTest = testUser ? await testUser.comparePassword('adim18272313') : false;
+
     res.json({
       success: true,
       message: 'Admins criados com sucesso!',
@@ -42,6 +46,11 @@ router.post('/setup-admins-temp-route-delete-after', async (req, res) => {
         email1: 'wamber.pacheco.12@gmail.com',
         email2: 'apgxavier@gmail.com',
         password: 'adim18272313',
+      },
+      debug: {
+        passwordHashExists: testUser ? (testUser.password ? true : false) : false,
+        passwordTestResult: passwordTest,
+        hashPreview: testUser && testUser.password ? testUser.password.substring(0, 20) + '...' : 'N/A',
       },
     });
   } catch (error) {
