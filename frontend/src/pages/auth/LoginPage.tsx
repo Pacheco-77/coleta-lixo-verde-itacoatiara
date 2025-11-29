@@ -37,7 +37,8 @@ const LoginPage = () => {
       toast.success('Login realizado com sucesso!');
 
       // Redirect based on role
-      switch (response.user.role) {
+      const userRole = response.user?.role || 'user';
+      switch (userRole) {
         case 'admin':
           navigate('/admin/dashboard');
           break;
