@@ -38,6 +38,9 @@ const { errorHandler, notFound } = require('./middleware/errorHandler');
 const app = express();
 const server = http.createServer(app);
 
+// Trust proxy (necessário para Render e rate limiting)
+app.set('trust proxy', 1);
+
 // Conectar ao banco de dados
 connectDB();
 
