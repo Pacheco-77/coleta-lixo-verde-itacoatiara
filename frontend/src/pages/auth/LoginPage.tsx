@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { handleApiError } from '@/lib/axios';
-import { Mail, Lock, Leaf } from 'lucide-react';
+import { Mail, Lock, Leaf, Eye, EyeOff } from 'lucide-react';
 import { loginSchema } from '@/utils/validation';
 import { authService } from '@/services/authService';
 import { useAuthStore } from '@/store/authStore';
@@ -19,6 +19,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const { setAuth } = useAuthStore();
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
@@ -85,14 +86,28 @@ const LoginPage = () => {
               error={errors.email?.message}
               {...register('email')}
             />
-
-            <Input
-              label="Senha"
-              type="password"
-              placeholder="••••••••"
-              leftIcon={<Lock className="h-5 w-5 text-gray-400" />}
-              error={errors.password?.message}
-              {...register('password')}
+            <div className="relative">
+              <Input
+                label="Senha"
+                type={showPassword ? "text" : "password"}
+                placeholder="••••••••"
+                leftIcon={<Lock className="h-5 w-5 text-gray-400" />}
+                error={errors.password?.message}
+                {...register('password')}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-9 text-gray-400 hover:text-gray-600 focus:outline-none"
+                title={showPassword ? "Ocultar senha" : "Mostrar senha"}
+              >
+                {showPassword ? (
+                  <EyeOff className="h-5 w-5" />
+                ) : (
+                  <Eye className="h-5 w-5" />
+                )}
+              </button>
+            </div>{...register('password')}
             />
 
             <div className="flex items-center justify-between">
