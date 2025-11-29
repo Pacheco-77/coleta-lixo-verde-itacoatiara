@@ -87,4 +87,4 @@ services:
         destination: /index.html
     envVars:
       - key: VITE_API_URL
-        value: https://coleta-verde-backend.onrender.com
+        value: https://coleta-lixo-verde-backend.onrender.com/api
