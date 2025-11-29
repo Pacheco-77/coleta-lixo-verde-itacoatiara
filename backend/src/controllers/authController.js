@@ -76,10 +76,13 @@ const register = async (req, res, next) => {
 // @access  Public
 const login = async (req, res, next) => {
   try {
+    console.log('🚀 LOGIN START:', { email: req.body.email });
+    
     const { email, password, twoFactorToken } = req.body;
 
     // Buscar usuário com senha
     const user = await User.findOne({ email }).select('+password');
+    console.log('📦 USER FOUND:', { found: !!user });
     
     // DEBUG: Log temporário
     console.log('🔍 DEBUG LOGIN:', {
@@ -152,6 +155,8 @@ const login = async (req, res, next) => {
 
     logger.logAuth('Login successful', user._id, true);
 
+    console.log('✅ LOGIN SUCCESS:', { userId: user._id, role: user.role });
+
     res.json({
       success: true,
       message: 'Login realizado com sucesso',
@@ -162,6 +167,7 @@ const login = async (req, res, next) => {
       },
     });
   } catch (error) {
+    console.error('❌ LOGIN ERROR:', error.message, error.stack);
     next(error);
   }
 };
