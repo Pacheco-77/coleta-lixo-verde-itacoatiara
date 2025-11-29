@@ -57,9 +57,22 @@ app.use(helmet({
   crossOriginEmbedderPolicy: false,
 }));
 
-// CORS
+// CORS - Configuração para produção e desenvolvimento
+const allowedOrigins = process.env.FRONTEND_URL 
+  ? process.env.FRONTEND_URL.split(',').map(url => url.trim())
+  : ['http://localhost:3000', 'http://localhost:5173'];
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: (origin, callback) => {
+    // Permitir requisições sem origin (mobile apps, Postman, etc)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV === 'development') {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'x-2fa-token'],
@@ -108,14 +121,28 @@ const authLimiter = rateLimit({
 app.get('/favicon.ico', (req, res) => res.status(204).end());
 
 // Health check
-app.get('/health', (req, res) => {
-  res.status(200).json({
+app.get('/health', async (req, res) => {
+  const healthcheck = {
     success: true,
     message: 'API está funcionando',
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
-    environment: process.env.NODE_ENV,
-  });
+    environment: process.env.NODE_ENV || 'development',
+    database: 'disconnected',
+    version: '1.0.0',
+  };
+
+  // Verificar conexão com MongoDB
+  try {
+    const mongoose = require('mongoose');
+    if (mongoose.connection.readyState === 1) {
+      healthcheck.database = 'connected';
+    }
+  } catch (error) {
+    healthcheck.database = 'error';
+  }
+
+  res.status(200).json(healthcheck);
 });
 
 // Rota raiz
