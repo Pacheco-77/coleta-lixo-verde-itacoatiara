@@ -107,8 +107,7 @@ const LoginPage = () => {
                   <Eye className="h-5 w-5" />
                 )}
               </button>
-            </div>{...register('password')}
-            />
+            </div>
 
             <div className="flex items-center justify-between">
               <label className="flex items-center">
