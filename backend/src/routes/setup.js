@@ -62,4 +62,44 @@ router.post('/setup-admins-temp-route-delete-after', async (req, res) => {
   }
 });
 
+// Rota de debug para testar login
+router.post('/debug-login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    
+    // Buscar usuário
+    const user = await User.findOne({ email }).select('+password');
+    
+    if (!user) {
+      return res.json({
+        success: false,
+        message: 'Usuário não encontrado',
+        email,
+      });
+    }
+    
+    // Testar senha
+    const isValid = await user.comparePassword(password);
+    
+    res.json({
+      success: true,
+      userFound: true,
+      email: user.email,
+      name: user.name,
+      role: user.role,
+      passwordValid: isValid,
+      isLocked: user.isLocked,
+      isActive: user.isActive,
+      emailVerified: user.emailVerified,
+      hasPassword: !!user.password,
+      hashPreview: user.password.substring(0, 30) + '...',
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+});
+
 module.exports = router;
