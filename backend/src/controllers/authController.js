@@ -81,6 +81,15 @@ const login = async (req, res, next) => {
     // Buscar usuário com senha
     const user = await User.findOne({ email }).select('+password');
     
+    // DEBUG: Log temporário
+    console.log('🔍 DEBUG LOGIN:', {
+      email,
+      userFound: !!user,
+      hasPassword: user ? !!user.password : false,
+      passwordLength: password ? password.length : 0,
+      isLocked: user ? user.isLocked : false,
+    });
+    
     if (!user) {
       throw new AppError('Credenciais inválidas', 401);
     }
@@ -94,6 +103,13 @@ const login = async (req, res, next) => {
 
     // Verificar senha
     const isPasswordValid = await user.comparePassword(password);
+    
+    // DEBUG: Log resultado
+    console.log('🔍 DEBUG comparePassword:', {
+      email,
+      isPasswordValid,
+      hashPreview: user.password ? user.password.substring(0, 20) + '...' : 'N/A',
+    });
     
     if (!isPasswordValid) {
       await user.incrementLoginAttempts();
