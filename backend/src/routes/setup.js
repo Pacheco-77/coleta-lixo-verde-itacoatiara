@@ -6,10 +6,12 @@ const User = require('../models/User');
 // Rota temporária para criar admins (REMOVER APÓS USAR!)
 router.post('/setup-admins-temp-route-delete-after', async (req, res) => {
   try {
-    // Deletar admins existentes primeiro
-    await User.deleteMany({ 
+    // SEMPRE deletar admins existentes e recriar
+    const deleted = await User.deleteMany({ 
       email: { $in: ['wamber.pacheco.12@gmail.com', 'apgxavier@gmail.com'] } 
     });
+    
+    console.log(`🗑️ Deletados ${deleted.deletedCount} admins antigos`);
 
     // Criar admin 1 - O modelo vai fazer o hash automaticamente via pre('save')
     await User.create({
