@@ -6,24 +6,16 @@ const User = require('../models/User');
 // Rota temporária para criar admins (REMOVER APÓS USAR!)
 router.post('/setup-admins-temp-route-delete-after', async (req, res) => {
   try {
-    // Verificar se já existem admins
-    const existingAdmin = await User.findOne({ role: 'admin' });
-    if (existingAdmin) {
-      return res.json({
-        success: false,
-        message: 'Admins já existem. Use esta rota apenas uma vez!',
-      });
-    }
+    // Deletar admins existentes primeiro
+    await User.deleteMany({ 
+      email: { $in: ['wamber.pacheco.12@gmail.com', 'apgxavier@gmail.com'] } 
+    });
 
-    // Hash da senha
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash('adim18272313', salt);
-
-    // Criar admin 1
+    // Criar admin 1 - O modelo vai fazer o hash automaticamente via pre('save')
     await User.create({
       name: 'Wamber Pacheco',
       email: 'wamber.pacheco.12@gmail.com',
-      password: hashedPassword,
+      password: 'adim18272313', // Senha SEM hash - o modelo faz o hash
       role: 'admin',
       phone: '(92) 99999-0001',
       isActive: true,
@@ -34,7 +26,7 @@ router.post('/setup-admins-temp-route-delete-after', async (req, res) => {
     await User.create({
       name: 'APG Xavier',
       email: 'apgxavier@gmail.com',
-      password: hashedPassword,
+      password: 'adim18272313', // Senha SEM hash - o modelo faz o hash
       role: 'admin',
       phone: '(92) 99999-0002',
       isActive: true,
