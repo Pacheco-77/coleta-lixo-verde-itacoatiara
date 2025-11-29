@@ -57,7 +57,7 @@ const validateLogin = [
     .trim()
     .notEmpty().withMessage('Email é obrigatório')
     .isEmail().withMessage('Email inválido')
-    .toLowerCase(),
+    .customSanitizer(value => value.toLowerCase()),
   
   body('password')
     .notEmpty().withMessage('Senha é obrigatória'),
