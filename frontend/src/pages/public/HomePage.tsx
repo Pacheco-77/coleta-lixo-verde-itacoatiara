@@ -273,7 +273,7 @@ const HomePage = () => {
           </p>
           <div className="flex gap-4 justify-center">
             <Link to="/register">
-              <Button size="lg" className="bg-white text-verde-escuro hover:bg-green-50 font-bold">
+              <Button size="lg" className="bg-white !text-[#2E7D32] hover:bg-green-50 font-bold shadow-md">
                 Criar Conta Grátis
               </Button>
             </Link>
