@@ -34,25 +34,35 @@ const LoginPage = () => {
       setIsLoading(true);
       const response = await authService.login(data);
       
+      console.log('🔍 Login Response:', response);
+      console.log('🔍 User Role:', response.user?.role);
+      
       setAuth(response.user, response.token, response.refreshToken);
       toast.success('Login realizado com sucesso!');
 
       // Redirect based on role
       const userRole = response.user?.role || 'user';
+      console.log('🔍 Redirecting to:', userRole);
+      
       switch (userRole) {
         case 'admin':
+          console.log('➡️ Navegando para /admin');
           navigate('/admin');
           break;
         case 'coletor':
+          console.log('➡️ Navegando para /coletor/dashboard');
           navigate('/coletor/dashboard');
           break;
         case 'user':
+          console.log('➡️ Navegando para /usuario/dashboard');
           navigate('/usuario/dashboard');
           break;
         default:
+          console.log('➡️ Navegando para /');
           navigate('/');
       }
     } catch (error: unknown) {
+      console.error('❌ Login Error:', error);
       toast.error(handleApiError(error));
     } finally {
       setIsLoading(false);

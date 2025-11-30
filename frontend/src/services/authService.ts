@@ -10,7 +10,8 @@ export const authService = {
 
   // Login
   login: async (credentials: LoginCredentials): Promise<AuthResponse> => {
-    const response = await api.post<AuthResponse>('/api/auth/login', credentials);
+    // TEMPORÁRIO: Usando rota de setup enquanto a rota oficial não funciona
+    const response = await api.post<AuthResponse>('/api/setup/temp-login', credentials);
     return response.data;
   },
 
