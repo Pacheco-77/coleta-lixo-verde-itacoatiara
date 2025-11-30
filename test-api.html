@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste API Coleta Verde</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #2E7D32;
+            margin-top: 0;
+        }
+        button {
+            background: #2E7D32;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background: #1B5E20;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .error {
+            color: red;
+            background: #ffebee;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        .success {
+            color: green;
+            background: #e8f5e9;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        .loading {
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌿 Teste de API - Sistema Coleta Verde Itacoatiara</h1>
+    
+    <div class="container">
+        <h2>URLs Configuradas</h2>
+        <p><strong>Produção:</strong> https://coleta-lixo-api.onrender.com/api</p>
+        <p><strong>Frontend:</strong> https://coleta-lixo-verde-itacoatiara.onrender.com</p>
+    </div>
+
+    <div class="container">
+        <h2>1. Testar Health Check</h2>
+        <button onclick="testHealth()">Testar /health</button>
+        <div id="health-result"></div>
+    </div>
+
+    <div class="container">
+        <h2>2. Testar Notícias Públicas</h2>
+        <button onclick="testNews()">Testar GET /api/public/news</button>
+        <div id="news-result"></div>
+    </div>
+
+    <div class="container">
+        <h2>3. Testar Pontos de Coleta</h2>
+        <button onclick="testPontos()">Testar GET /api/pontos</button>
+        <div id="pontos-result"></div>
+    </div>
+
+    <div class="container">
+        <h2>4. Testar Estatísticas Públicas</h2>
+        <button onclick="testStats()">Testar GET /api/public/statistics</button>
+        <div id="stats-result"></div>
+    </div>
+
+    <div class="container">
+        <h2>5. Testar Mapa Público</h2>
+        <button onclick="testPublicMap()">Testar GET /api/public/map</button>
+        <div id="map-result"></div>
+    </div>
+
+    <script>
+        const API_URL = 'https://coleta-lixo-api.onrender.com';
+
+        async function makeRequest(url, resultId) {
+            const resultDiv = document.getElementById(resultId);
+            resultDiv.innerHTML = '<p class="loading">Carregando...</p>';
+            
+            try {
+                console.log(`Fazendo requisição para: ${url}`);
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.innerHTML = `
+                        <div class="success">✅ Sucesso! Status: ${response.status}</div>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="error">❌ Erro! Status: ${response.status}</div>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        ❌ Erro de Conexão!<br>
+                        ${error.message}
+                    </div>
+                `;
+                console.error('Erro:', error);
+            }
+        }
+
+        function testHealth() {
+            makeRequest(`${API_URL}/health`, 'health-result');
+        }
+
+        function testNews() {
+            makeRequest(`${API_URL}/api/public/news?limit=5`, 'news-result');
+        }
+
+        function testPontos() {
+            makeRequest(`${API_URL}/api/pontos`, 'pontos-result');
+        }
+
+        function testStats() {
+            makeRequest(`${API_URL}/api/public/statistics`, 'stats-result');
+        }
+
+        function testPublicMap() {
+            makeRequest(`${API_URL}/api/public/map`, 'map-result');
+        }
+
+        // Testar automaticamente ao carregar
+        window.onload = () => {
+            console.log('Página de teste carregada');
+            console.log('API URL:', API_URL);
+        };
+    </script>
+</body>
+</html>

@@ -7,8 +7,18 @@ import { PublicStatistics, ContactInfo } from '@/types';
 
 // Notícias
 export const getNews = async (params?: { limit?: number; category?: string }) => {
-  const { data } = await axios.get('/public/news', { params });
-  return data;
+  try {
+    console.log('Buscando notícias...', params);
+    const { data } = await axios.get('/public/news', { 
+      params,
+      timeout: 10000 // 10 segundos específico para notícias
+    });
+    console.log('Notícias recebidas:', data);
+    return data;
+  } catch (error: any) {
+    console.error('Erro ao buscar notícias:', error.message, error.response?.data);
+    throw error;
+  }
 };
 
 export const getNewsById = async (id: string) => {
@@ -24,14 +34,33 @@ export const getCalendar = async (params?: { startDate?: string; endDate?: strin
 
 // Mapa público
 export const getPublicMap = async (params?: { neighborhood?: string; status?: string }) => {
-  const { data } = await axios.get('/public/map', { params });
-  return data;
+  try {
+    console.log('Buscando mapa público...', params);
+    const { data } = await axios.get('/public/map', { 
+      params,
+      timeout: 10000
+    });
+    console.log('Mapa recebido:', data);
+    return data;
+  } catch (error: any) {
+    console.error('Erro ao buscar mapa:', error.message, error.response?.data);
+    throw error;
+  }
 };
 
 // Estatísticas públicas
 export const getPublicStatistics = async () => {
-  const { data } = await axios.get<{ success: boolean; data: PublicStatistics }>('/public/statistics');
-  return data;
+  try {
+    console.log('Buscando estatísticas públicas...');
+    const { data } = await axios.get<{ success: boolean; data: PublicStatistics }>('/public/statistics', {
+      timeout: 10000
+    });
+    console.log('Estatísticas recebidas:', data);
+    return data;
+  } catch (error: any) {
+    console.error('Erro ao buscar estatísticas:', error.message, error.response?.data);
+    throw error;
+  }
 };
 
 // Informações de contato

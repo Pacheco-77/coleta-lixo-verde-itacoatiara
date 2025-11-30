@@ -36,20 +36,27 @@ export const pontosService = {
     try {
       // Verificar cache
       if (pontosCache && Date.now() - pontosCache.timestamp < CACHE_DURATION) {
+        console.log('Usando cache de pontos');
         return pontosCache.data;
       }
 
+      console.log('Buscando pontos de coleta...');
       const response = await axios.get('/pontos', { timeout: 10000 });
+      console.log('Resposta da API pontos:', response.data);
       const data = response.data.data;
       
       // Atualizar cache
       pontosCache = { data, timestamp: Date.now() };
+      console.log(`${data.length} pontos carregados com sucesso`);
       
       return data;
-    } catch (error) {
-      console.error('Erro ao listar pontos:', error);
+    } catch (error: any) {
+      console.error('Erro ao listar pontos:', error.message, error.response?.data);
       // Retornar cache antigo se disponível
-      if (pontosCache) return pontosCache.data;
+      if (pontosCache) {
+        console.log('Retornando cache antigo devido ao erro');
+        return pontosCache.data;
+      }
       throw error;
     }
   },
