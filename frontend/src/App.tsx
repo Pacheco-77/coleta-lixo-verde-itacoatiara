@@ -23,10 +23,15 @@ import CurrentRoutePage from './pages/collector/CurrentRoutePage';
 
 // Admin Pages
 import AdminDashboard from './pages/admin/AdminDashboard';
+import DashboardHome from './pages/admin/DashboardHome';
 import UsersPage from './pages/admin/UsersPage';
 import RoutesPage from './pages/admin/RoutesPage';
 import ReportsPage from './pages/admin/ReportsPage';
 import NewsManagementPage from './pages/admin/NewsManagementPage';
+import RelatoriosColetasPage from './pages/admin/RelatoriosColetasPage';
+import CadastrarColetoresPage from './pages/admin/CadastrarColetoresPage';
+import DenunciasPage from './pages/admin/DenunciasPage';
+import ReclamacoesPage from './pages/admin/ReclamacoesPage';
 
 // Other Pages
 import ProfilePage from './pages/ProfilePage';
@@ -71,11 +76,17 @@ function App() {
 
           {/* Admin Routes */}
           <Route element={<PrivateRoute allowedRoles={['admin']} />}>
-            <Route path="/admin/dashboard" element={<AdminDashboard />} />
-            <Route path="/admin/usuarios" element={<UsersPage />} />
-            <Route path="/admin/rotas" element={<RoutesPage />} />
-            <Route path="/admin/relatorios" element={<ReportsPage />} />
-            <Route path="/admin/noticias" element={<NewsManagementPage />} />
+            <Route path="/admin" element={<AdminDashboard />}>
+              <Route index element={<DashboardHome />} />
+              <Route path="relatorios-coletas" element={<RelatoriosColetasPage />} />
+              <Route path="cadastrar-coletores" element={<CadastrarColetoresPage />} />
+              <Route path="denuncias" element={<DenunciasPage />} />
+              <Route path="reclamacoes" element={<ReclamacoesPage />} />
+              <Route path="usuarios" element={<UsersPage />} />
+              <Route path="rotas" element={<RoutesPage />} />
+              <Route path="relatorios" element={<ReportsPage />} />
+              <Route path="noticias" element={<NewsManagementPage />} />
+            </Route>
           </Route>
 
           {/* Shared Protected Routes */}
