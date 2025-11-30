@@ -102,4 +102,79 @@ router.post('/debug-login', async (req, res) => {
   }
 });
 
+// Rota temporária de login sem validações (REMOVER APÓS USAR!)
+router.post('/temp-login', async (req, res) => {
+  try {
+    const { generateToken, generateRefreshToken } = require('../config/auth');
+    
+    console.log('🔑 TEMP LOGIN - Body:', req.body);
+    
+    const { email, password } = req.body;
+    
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email e senha são obrigatórios',
+      });
+    }
+    
+    // Buscar usuário
+    const user = await User.findOne({ email: email.toLowerCase() }).select('+password');
+    console.log('🔍 User found:', !!user);
+    
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: 'Credenciais inválidas',
+      });
+    }
+    
+    // Verificar senha
+    const isPasswordValid = await user.comparePassword(password);
+    console.log('🔐 Password valid:', isPasswordValid);
+    
+    if (!isPasswordValid) {
+      return res.status(401).json({
+        success: false,
+        message: 'Credenciais inválidas',
+      });
+    }
+    
+    // Gerar tokens
+    const token = generateToken(user._id, user.role);
+    const refreshToken = generateRefreshToken(user._id);
+    
+    // Atualizar usuário
+    user.refreshToken = refreshToken;
+    user.lastLogin = new Date();
+    await user.save();
+    
+    console.log('✅ Login successful');
+    
+    res.json({
+      success: true,
+      message: 'Login realizado com sucesso',
+      data: {
+        user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+          phone: user.phone,
+          isActive: user.isActive,
+        },
+        token,
+        refreshToken,
+      },
+    });
+  } catch (error) {
+    console.error('❌ Temp login error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erro interno do servidor',
+      error: error.message,
+    });
+  }
+});
+
 module.exports = router;
