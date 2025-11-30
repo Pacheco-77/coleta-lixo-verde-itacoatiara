@@ -66,7 +66,7 @@ services:
     region: oregon
     plan: free
     nodeVersion: 20.19.6
-    buildCommand: cd frontend && npm ci && npm run build
+    buildCommand: cd frontend && VITE_API_URL=https://coleta-lixo-api.onrender.com/api npm ci && npm run build
     staticPublishPath: frontend/dist
     pullRequestPreviewsEnabled: true
     headers:
