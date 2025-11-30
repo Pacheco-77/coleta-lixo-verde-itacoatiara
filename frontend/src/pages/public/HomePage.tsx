@@ -12,7 +12,7 @@ const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // Buscar notícias
-  const { data: newsData, isLoading: newsLoading } = useQuery({
+  const { data: newsData, isLoading: newsLoading, error: newsError } = useQuery({
     queryKey: ['public-news'],
     queryFn: () => publicService.getNews({ limit: 5 }),
   });
@@ -25,6 +25,15 @@ const HomePage = () => {
 
   const news: News[] = newsData?.data || [];
   const stats = statsData?.data;
+
+  // Debug logs
+  useEffect(() => {
+    console.log('HomePage montado');
+    console.log('newsData:', newsData);
+    console.log('news array:', news);
+    console.log('newsLoading:', newsLoading);
+    console.log('newsError:', newsError);
+  }, [newsData, news, newsLoading, newsError]);
 
   // Auto-play do carrossel
   useEffect(() => {
