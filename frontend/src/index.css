@@ -1,3 +1,6 @@
+/* Leaflet CSS - necessário para mapas funcionarem */
+@import 'leaflet/dist/leaflet.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -358,6 +361,31 @@
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* Leaflet Map Fixes */
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+.leaflet-tile-pane {
+  z-index: 1 !important;
+}
+
+.leaflet-marker-pane {
+  z-index: 600 !important;
+}
+
+.leaflet-popup-pane {
+  z-index: 700 !important;
+}
+
+/* Custom marker styles */
+.custom-marker {
+  background: transparent !important;
+  border: none !important;
 }
 
 /* Print styles */

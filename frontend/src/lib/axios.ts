@@ -2,7 +2,7 @@ import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { toast } from 'sonner';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-const API_TIMEOUT = parseInt(import.meta.env.VITE_API_TIMEOUT) || 30000;
+const API_TIMEOUT = parseInt(import.meta.env.VITE_API_TIMEOUT) || 15000; // Reduzido para 15s
 
 // Create axios instance
 export const api = axios.create({
@@ -12,6 +12,8 @@ export const api = axios.create({
     'Content-Type': 'application/json',
   },
   withCredentials: true, // Para enviar cookies
+  // Configurações para melhorar performance
+  validateStatus: (status) => status < 500, // Não rejeitar em erros de cliente
 });
 
 // Request interceptor

@@ -49,7 +49,7 @@
 - Axios (HTTP)
 
 **Hospedagem:**
-- Frontend: Vercel
+- Frontend: Render
 - Backend: Render
 - Database: MongoDB Atlas
 

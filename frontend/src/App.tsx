@@ -11,6 +11,8 @@ import RegisterPage from './pages/auth/RegisterPage';
 // Public Pages
 import HomePage from './pages/public/HomePage';
 import PublicMapPage from './pages/public/PublicMapPage';
+import MapaColetaPage from './pages/public/MapaColetaPage';
+import CheckInPage from './pages/public/CheckInPage';
 
 // Citizen Pages
 import CitizenDashboard from './pages/citizen/CitizenDashboard';
@@ -33,6 +35,7 @@ import CadastrarColetoresPage from './pages/admin/CadastrarColetoresPage';
 import DenunciasPage from './pages/admin/DenunciasPage';
 import ReclamacoesPage from './pages/admin/ReclamacoesPage';
 import RuasItacoatiaraPage from './pages/admin/RuasItacoatiaraPage';
+import MapaTempoRealPage from './pages/admin/MapaTempoRealPage';
 
 // Other Pages
 import ProfilePage from './pages/ProfilePage';
@@ -56,6 +59,8 @@ function App() {
           {/* Public Routes */}
           <Route path="/" element={<HomePage />} />
           <Route path="/mapa" element={<PublicMapPage />} />
+          <Route path="/mapa-coleta" element={<MapaColetaPage />} />
+          <Route path="/checkin/:id" element={<CheckInPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
 
@@ -84,6 +89,7 @@ function App() {
               <Route path="denuncias" element={<DenunciasPage />} />
               <Route path="reclamacoes" element={<ReclamacoesPage />} />
               <Route path="ruas-itacoatiara" element={<RuasItacoatiaraPage />} />
+              <Route path="mapa-tempo-real" element={<MapaTempoRealPage />} />
               <Route path="usuarios" element={<UsersPage />} />
               <Route path="rotas" element={<RoutesPage />} />
               <Route path="relatorios" element={<ReportsPage />} />

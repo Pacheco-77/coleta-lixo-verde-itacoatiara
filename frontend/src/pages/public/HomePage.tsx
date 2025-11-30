@@ -73,13 +73,16 @@ const HomePage = () => {
               <Link to="/mapa" className="hover:text-green-200 transition">
                 Mapa
               </Link>
+              <Link to="/mapa-coleta" className="hover:text-green-200 transition">
+                Mapa de Coleta
+              </Link>
               <Link to="/login">
                 <Button variant="outline" className="bg-white text-green-700 hover:bg-green-50">
                   Entrar
                 </Button>
               </Link>
               <Link to="/register">
-                <Button className="bg-green-600 hover:bg-green-500">
+                <Button className="bg-white text-verde-escuro hover:bg-green-50 border-2 border-verde-escuro font-semibold">
                   Cadastrar
                 </Button>
               </Link>
@@ -270,7 +273,7 @@ const HomePage = () => {
           </p>
           <div className="flex gap-4 justify-center">
             <Link to="/register">
-              <Button size="lg" className="bg-white text-green-700 hover:bg-green-50">
+              <Button size="lg" className="bg-white text-verde-escuro hover:bg-green-50 font-bold">
                 Criar Conta Grátis
               </Button>
             </Link>

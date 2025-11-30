@@ -1,5 +1,5 @@
 import { Link, useLocation, Outlet } from 'react-router-dom';
-import { LogOut, FileText, UserPlus, AlertCircle, MessageSquare, LayoutDashboard, MapPin } from 'lucide-react';
+import { LogOut, FileText, UserPlus, AlertCircle, MessageSquare, LayoutDashboard, MapPin, Map } from 'lucide-react';
 import { useAuthStore } from '@/store/authStore';
 
 const AdminDashboard = () => {
@@ -13,6 +13,7 @@ const AdminDashboard = () => {
 
   const menuItems = [
     { path: '/admin', label: 'Dashboard', icon: LayoutDashboard },
+    { path: '/admin/mapa-tempo-real', label: 'Mapa em Tempo Real', icon: Map },
     { path: '/admin/relatorios-coletas', label: 'Relatórios de Coletas', icon: FileText },
     { path: '/admin/cadastrar-coletores', label: 'Cadastrar Coletores', icon: UserPlus },
     { path: '/admin/denuncias', label: 'Denúncias', icon: AlertCircle },

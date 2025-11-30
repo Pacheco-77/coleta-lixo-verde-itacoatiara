@@ -177,6 +177,7 @@ const collectorRoutes = require('./routes/collector');
 const adminRoutes = require('./routes/admin');
 const publicRoutes = require('./routes/public');
 const setupRoutes = require('./routes/setup'); // Rota temporária
+const pontosRoutes = require('./routes/pontos'); // Rotas de pontos de coleta
 
 // Rotas da API
 app.use('/api/auth', authLimiter, authRoutes);
@@ -185,6 +186,7 @@ app.use('/api/citizen', citizenRoutes);
 app.use('/api/collector', collectorRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/setup', setupRoutes); // Rota temporária - REMOVER APÓS USAR!
+app.use('/api', pontosRoutes); // Rotas públicas de pontos de coleta
 
 // Rota temporária de teste
 app.get('/api/test', (req, res) => {
