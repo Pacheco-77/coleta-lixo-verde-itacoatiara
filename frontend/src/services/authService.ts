@@ -11,8 +11,16 @@ export const authService = {
   // Login
   login: async (credentials: LoginCredentials): Promise<AuthResponse> => {
     // TEMPORÁRIO: Usando rota de setup enquanto a rota oficial não funciona
-    const response = await api.post<AuthResponse>('/api/setup/temp-login', credentials);
-    return response.data;
+    const response = await api.post<{ success: boolean; message: string; data: AuthResponse }>('/api/setup/temp-login', credentials);
+    // A API retorna { success, message, data: { user, token, refreshToken } }
+    // Mas precisamos retornar apenas { success, message, user, token, refreshToken }
+    return {
+      success: response.data.success,
+      message: response.data.message,
+      user: response.data.data.user,
+      token: response.data.data.token,
+      refreshToken: response.data.data.refreshToken,
+    };
   },
 
   // Logout
