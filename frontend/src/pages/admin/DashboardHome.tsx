@@ -6,56 +6,56 @@ const DashboardHome = () => {
     <div>
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <Card>
-          <CardContent className="p-6">
+          <CardContent className="p-6 bg-white border-2 border-primary-500/20">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 mb-1">Total de Usuários</p>
-                <p className="text-2xl font-bold text-gray-900">248</p>
+                <p className="text-sm text-cinza-escuro mb-1">Total de Usuários</p>
+                <p className="text-2xl font-bold text-primary-800">248</p>
               </div>
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                <Users className="h-6 w-6 text-blue-600" />
+              <div className="w-12 h-12 bg-secondary-100 rounded-full flex items-center justify-center">
+                <Users className="h-6 w-6 text-secondary-500" />
               </div>
             </div>
           </CardContent>
         </Card>
 
         <Card>
-          <CardContent className="p-6">
+          <CardContent className="p-6 bg-white border-2 border-primary-500/20">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 mb-1">Pontos de Coleta</p>
-                <p className="text-2xl font-bold text-gray-900">42</p>
+                <p className="text-sm text-cinza-escuro mb-1">Pontos de Coleta</p>
+                <p className="text-2xl font-bold text-primary-800">42</p>
               </div>
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                <MapPin className="h-6 w-6 text-green-600" />
+              <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
+                <MapPin className="h-6 w-6 text-primary-500" />
               </div>
             </div>
           </CardContent>
         </Card>
 
         <Card>
-          <CardContent className="p-6">
+          <CardContent className="p-6 bg-white border-2 border-primary-500/20">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 mb-1">Coletas Realizadas</p>
-                <p className="text-2xl font-bold text-gray-900">1,234</p>
+                <p className="text-sm text-cinza-escuro mb-1">Coletas Realizadas</p>
+                <p className="text-2xl font-bold text-primary-800">1,234</p>
               </div>
-              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                <FileText className="h-6 w-6 text-purple-600" />
+              <div className="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center">
+                <FileText className="h-6 w-6 text-accent-500" />
               </div>
             </div>
           </CardContent>
         </Card>
 
         <Card>
-          <CardContent className="p-6">
+          <CardContent className="p-6 bg-white border-2 border-primary-500/20">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 mb-1">Taxa de Crescimento</p>
-                <p className="text-2xl font-bold text-gray-900">+12%</p>
+                <p className="text-sm text-cinza-escuro mb-1">Taxa de Crescimento</p>
+                <p className="text-2xl font-bold text-primary-800">+12%</p>
               </div>
-              <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
-                <TrendingUp className="h-6 w-6 text-yellow-600" />
+              <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
+                <TrendingUp className="h-6 w-6 text-primary-500" />
               </div>
             </div>
           </CardContent>

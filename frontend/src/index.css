@@ -2,6 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Variáveis CSS do Projeto - Paleta de Cores */
+:root {
+  --verde-escuro: #2E7D32;
+  --verde-medio: #4CAF50;
+  --azul: #1976D2;
+  --laranja: #FF6D00;
+  --laranja-hover: #E65100;
+  --cinza-escuro: #455A64;
+  --cinza-claro: #F5F5F5;
+  --branco: #FFFFFF;
+}
+
+/* Sobrescrever cores padrão do Tailwind */
+@layer components {
+  /* Botões primários - Laranja */
+  .btn-primary,
+  button[type="submit"]:not(.btn-outline),
+  .bg-primary-600 {
+    @apply bg-accent-500 hover:bg-accent-600 text-white;
+  }
+  
+  /* Links - Azul */
+  a:not(.btn) {
+    @apply text-secondary-500 hover:text-secondary-700;
+  }
+  
+  /* Cards e fundos */
+  .card-bg {
+    @apply bg-cinza-claro border border-verde-medio/20;
+  }
+  
+  /* Menu lateral admin */
+  .admin-sidebar {
+    @apply bg-primary-800 text-white;
+  }
+  
+  .admin-sidebar-item {
+    @apply text-white hover:bg-primary-500 rounded-lg transition-colors;
+  }
+  
+  .admin-sidebar-item-active {
+    @apply bg-primary-500 font-medium;
+  }
+  
+  /* Cabeçalho */
+  .header-primary {
+    @apply bg-primary-800 text-white;
+  }
+}
+
 @layer base {
   * {
     border-color: theme('colors.gray.200');

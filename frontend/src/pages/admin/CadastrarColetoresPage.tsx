@@ -33,11 +33,11 @@ const CadastrarColetoresPage = () => {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
-          <UserPlus className="h-8 w-8 text-green-600" />
+        <h1 className="text-3xl font-bold text-primary-800 flex items-center gap-3">
+          <UserPlus className="h-8 w-8 text-primary-500" />
           Cadastrar Coletores
         </h1>
-        <p className="text-gray-600 mt-1">Adicione novos coletores ao sistema</p>
+        <p className="text-cinza-escuro mt-1">Adicione novos coletores ao sistema</p>
       </div>
 
       <div className="grid lg:grid-cols-3 gap-6">
@@ -184,7 +184,7 @@ const CadastrarColetoresPage = () => {
                 </div>
 
                 <div className="flex gap-4 pt-4">
-                  <Button type="submit" className="flex-1">
+                  <Button type="submit" variant="primary" className="flex-1">
                     Cadastrar Coletor
                   </Button>
                   <Button type="button" variant="outline" onClick={() => window.history.back()}>

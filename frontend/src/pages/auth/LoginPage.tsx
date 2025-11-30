@@ -70,22 +70,22 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-cinza-claro flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         {/* Logo and Title */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-600 rounded-full mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-800 rounded-full mb-4">
             <Leaf className="h-8 w-8 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-3xl font-bold text-primary-800 mb-2">
             Sistema de Coleta de Lixo Verde
           </h1>
-          <p className="text-gray-600">Itacoatiara - AM</p>
+          <p className="text-cinza-escuro">Itacoatiara - AM</p>
         </div>
 
         {/* Login Form */}
-        <div className="bg-white rounded-lg shadow-xl p-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Entrar</h2>
+        <div className="bg-white rounded-lg shadow-xl border-2 border-primary-500 p-8">
+          <h2 className="text-2xl font-bold text-primary-800 mb-6">Entrar</h2>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <Input
@@ -123,13 +123,13 @@ const LoginPage = () => {
               <label className="flex items-center">
                 <input
                   type="checkbox"
-                  className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                  className="rounded border-gray-300 text-primary-500 focus:ring-primary-500"
                 />
-                <span className="ml-2 text-sm text-gray-600">Lembrar-me</span>
+                <span className="ml-2 text-sm text-cinza-escuro">Lembrar-me</span>
               </label>
               <Link
                 to="/recuperar-senha"
-                className="text-sm text-primary-600 hover:text-primary-700"
+                className="text-sm text-secondary-500 hover:text-secondary-700 font-medium"
               >
                 Esqueceu a senha?
               </Link>
@@ -137,8 +137,7 @@ const LoginPage = () => {
 
             <Button
               type="submit"
-              variant="primary"
-              className="w-full"
+              className="w-full bg-accent-500 hover:bg-accent-600 text-white font-semibold py-3 rounded-lg transition-colors"
               isLoading={isLoading}
             >
               Entrar
@@ -146,11 +145,11 @@ const LoginPage = () => {
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-cinza-escuro">
               Não tem uma conta?{' '}
               <Link
                 to="/register"
-                className="text-primary-600 hover:text-primary-700 font-medium"
+                className="text-secondary-500 hover:text-secondary-700 font-medium"
               >
                 Cadastre-se
               </Link>

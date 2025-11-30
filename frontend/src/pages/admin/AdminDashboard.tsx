@@ -27,12 +27,12 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex">
-      {/* Sidebar */}
-      <aside className="w-64 bg-white shadow-lg flex flex-col">
-        <div className="p-6 border-b">
-          <h1 className="text-xl font-bold text-gray-900">Painel Admin</h1>
-          <p className="text-sm text-gray-600 mt-1">Bem-vindo, {user?.name}</p>
+    <div className="min-h-screen bg-cinza-claro flex">
+      {/* Sidebar - Verde Escuro */}
+      <aside className="w-64 bg-primary-800 shadow-lg flex flex-col">
+        <div className="p-6 border-b border-primary-700">
+          <h1 className="text-xl font-bold text-white">Painel Admin</h1>
+          <p className="text-sm text-primary-100 mt-1">Bem-vindo, {user?.name}</p>
         </div>
 
         <nav className="flex-1 p-4">
@@ -47,8 +47,8 @@ const AdminDashboard = () => {
                     to={item.path}
                     className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                       active
-                        ? 'bg-green-100 text-green-700 font-medium'
-                        : 'text-gray-700 hover:bg-gray-100'
+                        ? 'bg-primary-500 text-white font-medium shadow-md'
+                        : 'text-white hover:bg-primary-500/80'
                     }`}
                   >
                     <Icon className="h-5 w-5" />
@@ -60,10 +60,10 @@ const AdminDashboard = () => {
           </ul>
         </nav>
 
-        <div className="p-4 border-t">
+        <div className="p-4 border-t border-primary-700">
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 px-4 py-3 rounded-lg text-red-600 hover:bg-red-50 transition-colors w-full"
+            className="flex items-center gap-3 px-4 py-3 rounded-lg text-white hover:bg-red-600 transition-colors w-full"
           >
             <LogOut className="h-5 w-5" />
             <span>Sair</span>
@@ -73,8 +73,8 @@ const AdminDashboard = () => {
 
       {/* Main Content */}
       <main className="flex-1 p-8">
-        <div className="bg-white shadow-sm border-b mb-6 -m-8 p-6">
-          <h2 className="text-2xl font-bold text-gray-900">
+        <div className="bg-primary-800 text-white shadow-sm border-b mb-6 -m-8 p-6">
+          <h2 className="text-2xl font-bold">
             Bem-vindo, {user?.name} - Painel do Administrador
           </h2>
         </div>

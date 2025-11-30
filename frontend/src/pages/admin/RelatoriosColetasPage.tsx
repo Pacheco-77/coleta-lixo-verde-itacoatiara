@@ -18,10 +18,10 @@ const RelatoriosColetasPage = () => {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Relatórios de Coletas</h1>
-          <p className="text-gray-600 mt-1">Visualize e exporte relatórios detalhados de coletas</p>
+          <h1 className="text-3xl font-bold text-primary-800">Relatórios de Coletas</h1>
+          <p className="text-cinza-escuro mt-1">Visualize e exporte relatórios detalhados de coletas</p>
         </div>
-        <Button leftIcon={<Download className="h-4 w-4" />}>
+        <Button variant="primary" leftIcon={<Download className="h-4 w-4" />}>
           Exportar Excel
         </Button>
       </div>

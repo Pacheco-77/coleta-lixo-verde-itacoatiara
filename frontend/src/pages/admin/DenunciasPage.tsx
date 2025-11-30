@@ -65,11 +65,11 @@ const DenunciasPage = () => {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
-            <AlertCircle className="h-8 w-8 text-red-600" />
+          <h1 className="text-3xl font-bold text-primary-800 flex items-center gap-3">
+            <AlertCircle className="h-8 w-8 text-accent-500" />
             Denúncias
           </h1>
-          <p className="text-gray-600 mt-1">Gerencie denúncias de problemas de coleta</p>
+          <p className="text-cinza-escuro mt-1">Gerencie denúncias de problemas de coleta</p>
         </div>
       </div>
 
