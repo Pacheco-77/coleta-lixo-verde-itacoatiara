@@ -32,6 +32,7 @@ import RelatoriosColetasPage from './pages/admin/RelatoriosColetasPage';
 import CadastrarColetoresPage from './pages/admin/CadastrarColetoresPage';
 import DenunciasPage from './pages/admin/DenunciasPage';
 import ReclamacoesPage from './pages/admin/ReclamacoesPage';
+import RuasItacoatiaraPage from './pages/admin/RuasItacoatiaraPage';
 
 // Other Pages
 import ProfilePage from './pages/ProfilePage';
@@ -82,6 +83,7 @@ function App() {
               <Route path="cadastrar-coletores" element={<CadastrarColetoresPage />} />
               <Route path="denuncias" element={<DenunciasPage />} />
               <Route path="reclamacoes" element={<ReclamacoesPage />} />
+              <Route path="ruas-itacoatiara" element={<RuasItacoatiaraPage />} />
               <Route path="usuarios" element={<UsersPage />} />
               <Route path="rotas" element={<RoutesPage />} />
               <Route path="relatorios" element={<ReportsPage />} />

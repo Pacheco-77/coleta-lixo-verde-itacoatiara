@@ -1,5 +1,5 @@
 import { Link, useLocation, Outlet } from 'react-router-dom';
-import { LogOut, FileText, UserPlus, AlertCircle, MessageSquare, LayoutDashboard } from 'lucide-react';
+import { LogOut, FileText, UserPlus, AlertCircle, MessageSquare, LayoutDashboard, MapPin } from 'lucide-react';
 import { useAuthStore } from '@/store/authStore';
 
 const AdminDashboard = () => {
@@ -17,6 +17,7 @@ const AdminDashboard = () => {
     { path: '/admin/cadastrar-coletores', label: 'Cadastrar Coletores', icon: UserPlus },
     { path: '/admin/denuncias', label: 'Denúncias', icon: AlertCircle },
     { path: '/admin/reclamacoes', label: 'Reclamações', icon: MessageSquare },
+    { path: '/admin/ruas-itacoatiara', label: 'Ruas de Itacoatiara', icon: MapPin },
   ];
 
   const isActive = (path: string) => {
