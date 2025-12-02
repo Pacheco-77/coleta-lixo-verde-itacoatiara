@@ -10,7 +10,16 @@ export const getNews = async (params?: { limit?: number; category?: string }) =>
   try {
     console.log('🔍 Buscando notícias...', params);
     
-    const apiUrl = import.meta.env.VITE_API_URL || 'https://coleta-lixo-api.onrender.com/api';
+    let apiUrl = import.meta.env.VITE_API_URL || 'https://coleta-lixo-api.onrender.com/api';
+    console.log('🔧 VITE_API_URL:', import.meta.env.VITE_API_URL);
+    console.log('🔧 apiUrl antes:', apiUrl);
+    
+    // Garantir que tem /api no final
+    if (!apiUrl.endsWith('/api')) {
+      apiUrl = apiUrl + '/api';
+    }
+    console.log('🔧 apiUrl depois:', apiUrl);
+    
     const queryString = params ? `?${new URLSearchParams(params as any).toString()}` : '';
     const url = `${apiUrl}/public/news${queryString}`;
     
