@@ -5,26 +5,45 @@ import { PublicStatistics, ContactInfo } from '@/types';
  * Serviço para APIs públicas (sem autenticação)
  */
 
-// Notícias
+// Notícias - Versão com fetch nativo para evitar problemas do axios
 export const getNews = async (params?: { limit?: number; category?: string }) => {
   try {
     console.log('🔍 Buscando notícias...', params);
-    const response = await axios.get('/public/news', { 
-      params,
-      timeout: 10000, // 10 segundos específico para notícias
-      withCredentials: false // Desabilitar credenciais para rotas públicas
+    
+    const apiUrl = import.meta.env.VITE_API_URL || 'https://coleta-lixo-api.onrender.com/api';
+    const queryString = params ? `?${new URLSearchParams(params as any).toString()}` : '';
+    const url = `${apiUrl}/public/news${queryString}`;
+    
+    console.log('🌐 URL completa:', url);
+    
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      mode: 'cors',
+      credentials: 'omit', // Não enviar cookies
     });
-    console.log('📦 Response completo:', response);
-    console.log('📄 Response.data:', response.data);
-    console.log('✅ Success?', response.data?.success);
-    console.log('📊 Count:', response.data?.count);
-    console.log('📰 Data length:', response.data?.data?.length);
-    return response.data;
+    
+    console.log('📦 Response status:', response.status);
+    console.log('📦 Response ok:', response.ok);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    const data = await response.json();
+    
+    console.log('📄 Response.data:', data);
+    console.log('✅ Success?', data?.success);
+    console.log('📊 Count:', data?.count);
+    console.log('📰 Data length:', data?.data?.length);
+    
+    return data;
   } catch (error: any) {
     console.error('❌ Erro ao buscar notícias:', error);
     console.error('❌ Error.message:', error.message);
-    console.error('❌ Error.response:', error.response);
-    console.error('❌ Error.response?.data:', error.response?.data);
+    console.error('❌ Error.stack:', error.stack);
     // Retornar estrutura padrão em caso de erro
     return { success: false, count: 0, data: [], error: error.message };
   }
