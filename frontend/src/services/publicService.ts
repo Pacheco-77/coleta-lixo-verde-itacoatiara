@@ -69,14 +69,32 @@ export const getPublicMap = async (params?: { neighborhood?: string; status?: st
 // Estatísticas públicas
 export const getPublicStatistics = async () => {
   try {
-    console.log('Buscando estatísticas públicas...');
-    const { data } = await axios.get<{ success: boolean; data: PublicStatistics }>('/public/statistics', {
-      timeout: 10000
+    let apiUrl = import.meta.env.VITE_API_URL || 'https://coleta-lixo-api.onrender.com/api';
+    
+    // Garantir que tem /api no final
+    if (!apiUrl.endsWith('/api')) {
+      apiUrl = apiUrl + '/api';
+    }
+    
+    const url = `${apiUrl}/public/statistics`;
+    
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      mode: 'cors',
+      credentials: 'omit',
     });
-    console.log('Estatísticas recebidas:', data);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    const data = await response.json();
     return data;
   } catch (error: any) {
-    console.error('Erro ao buscar estatísticas:', error.message, error.response?.data);
+    console.error('Erro ao buscar estatísticas:', error.message);
     throw error;
   }
 };
