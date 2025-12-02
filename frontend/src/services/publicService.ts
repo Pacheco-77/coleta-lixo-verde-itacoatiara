@@ -8,16 +8,21 @@ import { PublicStatistics, ContactInfo } from '@/types';
 // Notícias
 export const getNews = async (params?: { limit?: number; category?: string }) => {
   try {
-    console.log('Buscando notícias...', params);
-    const { data } = await axios.get('/public/news', { 
+    console.log('🔍 Buscando notícias...', params);
+    const response = await axios.get('/public/news', { 
       params,
       timeout: 10000 // 10 segundos específico para notícias
     });
-    console.log('Notícias recebidas:', data);
-    return data;
+    console.log('📦 Response completo:', response);
+    console.log('📄 Response.data:', response.data);
+    console.log('✅ Success?', response.data?.success);
+    console.log('📊 Count:', response.data?.count);
+    console.log('📰 Data length:', response.data?.data?.length);
+    return response.data;
   } catch (error: any) {
-    console.error('Erro ao buscar notícias:', error.message, error.response?.data);
-    throw error;
+    console.error('❌ Erro ao buscar notícias:', error.message, error.response?.data);
+    // Retornar estrutura padrão em caso de erro
+    return { success: false, count: 0, data: [], error: error.message };
   }
 };
 
