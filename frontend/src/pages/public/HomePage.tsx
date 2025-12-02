@@ -79,10 +79,10 @@ const HomePage = () => {
               </div>
             </div>
             <nav className="flex items-center gap-4">
-              <Link to="/mapa" className="text-white font-medium hover:text-green-200 transition-colors px-3 py-2 rounded-lg hover:bg-green-600">
+              <Link to="/mapa" className="bg-green-600 text-white font-bold hover:bg-green-500 transition-all px-4 py-2 rounded-lg shadow-md hover:shadow-lg">
                 🗺️ Mapa
               </Link>
-              <Link to="/mapa-coleta" className="text-white font-medium hover:text-green-200 transition-colors px-3 py-2 rounded-lg hover:bg-green-600">
+              <Link to="/mapa-coleta" className="bg-green-600 text-white font-bold hover:bg-green-500 transition-all px-4 py-2 rounded-lg shadow-md hover:shadow-lg">
                 📍 Mapa de Coleta
               </Link>
               <Link to="/login">
