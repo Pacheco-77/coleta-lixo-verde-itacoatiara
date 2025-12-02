@@ -215,7 +215,7 @@ export default function MapaTempoReal() {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          {pontos.map((ponto) => (
+          {Array.isArray(pontos) && pontos.map((ponto) => (
             <Marker
               key={ponto._id}
               position={[ponto.latitude, ponto.longitude]}

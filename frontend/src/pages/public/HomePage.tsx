@@ -140,9 +140,9 @@ const HomePage = () => {
 
               {/* Indicadores */}
               <div className="absolute bottom-4 right-4 flex gap-2">
-                {news.map((_, index) => (
+                {news.map((item, index) => (
                   <button
-                    key={index}
+                    key={`indicator-${item._id}`}
                     onClick={() => setCurrentSlide(index)}
                     className={`w-3 h-3 rounded-full transition ${
                       index === currentSlide ? 'bg-white' : 'bg-white/50'
