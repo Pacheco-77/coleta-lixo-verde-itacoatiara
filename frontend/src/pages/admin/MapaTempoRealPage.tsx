@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -85,6 +85,7 @@ export default function MapaTempoReal() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [ultimaAtualizacao, setUltimaAtualizacao] = useState<Date>(new Date());
+  const [mapLoaded, setMapLoaded] = useState(false);
 
   const carregarDados = async () => {
     try {
@@ -105,10 +106,15 @@ export default function MapaTempoReal() {
   };
 
   useEffect(() => {
+    // Delay para garantir que o DOM está pronto
+    const mapLoadTimeout = setTimeout(() => {
+      setMapLoaded(true);
+    }, 300);
+
     // Carregar dados inicial com delay
     const timeoutId = setTimeout(() => {
       carregarDados();
-    }, 100);
+    }, 500);
 
     // Atualizar automaticamente a cada 8 segundos
     const interval = setInterval(() => {
@@ -116,6 +122,7 @@ export default function MapaTempoReal() {
     }, 8000);
 
     return () => {
+      clearTimeout(mapLoadTimeout);
       clearTimeout(timeoutId);
       clearInterval(interval);
     };
@@ -205,17 +212,27 @@ export default function MapaTempoReal() {
       </div>
 
       {/* Mapa */}
-      <div className="flex-1 relative">
-        <MapContainer
-          center={center}
-          zoom={14}
-          style={{ height: '100%', width: '100%' }}
-        >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          {Array.isArray(pontos) && pontos.map((ponto) => (
+      <div className="flex-1 relative" key="mapa-tempo-real-container">
+        {!mapLoaded ? (
+          <div className="flex items-center justify-center h-full bg-gray-100">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-verde-escuro mx-auto mb-4"></div>
+              <p className="text-gray-600">Inicializando mapa...</p>
+            </div>
+          </div>
+        ) : (
+          <MapContainer
+            key="mapa-tempo-real"
+            center={center}
+            zoom={14}
+            style={{ height: '100%', width: '100%' }}
+            scrollWheelZoom={true}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            {Array.isArray(pontos) && pontos.map((ponto) => (
             <Marker
               key={ponto._id}
               position={[ponto.latitude, ponto.longitude]}
@@ -251,7 +268,8 @@ export default function MapaTempoReal() {
               </Popup>
             </Marker>
           ))}
-        </MapContainer>
+          </MapContainer>
+        )}
       </div>
     </div>
   );
