@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Direto de Notícias</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #00ff00;
+        }
+        .log { margin: 5px 0; }
+        .error { color: #ff0000; }
+        .success { color: #00ff00; }
+        .info { color: #ffff00; }
+        button {
+            background: #00ff00;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px 0;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔬 Teste de API - Notícias</h1>
+    <button onclick="testFetch()">Testar com FETCH</button>
+    <button onclick="testXHR()">Testar com XMLHttpRequest</button>
+    <button onclick="clearLogs()">Limpar Logs</button>
+    <div id="logs"></div>
+
+    <script>
+        const API_URL = 'https://coleta-lixo-api.onrender.com/api';
+        const logsDiv = document.getElementById('logs');
+
+        function log(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `log ${type}`;
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logsDiv.appendChild(div);
+            console.log(message);
+        }
+
+        function clearLogs() {
+            logsDiv.innerHTML = '';
+        }
+
+        async function testFetch() {
+            log('========== TESTE COM FETCH ==========', 'info');
+            try {
+                log(`Chamando: ${API_URL}/public/news?limit=5`, 'info');
+                
+                const response = await fetch(`${API_URL}/public/news?limit=5`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    mode: 'cors',
+                    credentials: 'omit'
+                });
+
+                log(`Status: ${response.status}`, response.ok ? 'success' : 'error');
+                log(`Headers: ${JSON.stringify([...response.headers.entries()])}`, 'info');
+                
+                const data = await response.json();
+                
+                log(`Response.success: ${data.success}`, data.success ? 'success' : 'error');
+                log(`Response.count: ${data.count}`, 'info');
+                log(`Response.data type: ${typeof data.data}`, 'info');
+                log(`Response.data length: ${data.data?.length || 0}`, 'info');
+                
+                if (data.data && data.data.length > 0) {
+                    log(`Primeira notícia: ${data.data[0].title}`, 'success');
+                }
+                
+                log(`JSON completo: ${JSON.stringify(data, null, 2)}`, 'success');
+                
+            } catch (error) {
+                log(`ERRO: ${error.message}`, 'error');
+                log(`Stack: ${error.stack}`, 'error');
+            }
+        }
+
+        async function testXHR() {
+            log('========== TESTE COM XMLHttpRequest ==========', 'info');
+            
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `${API_URL}/public/news?limit=5`, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            
+            xhr.onload = function() {
+                log(`XHR Status: ${xhr.status}`, 'info');
+                log(`XHR Response: ${xhr.responseText.substring(0, 200)}...`, 'success');
+                
+                try {
+                    const data = JSON.parse(xhr.responseText);
+                    log(`XHR Parsed success: ${data.success}`, data.success ? 'success' : 'error');
+                    log(`XHR Parsed count: ${data.count}`, 'info');
+                } catch (e) {
+                    log(`XHR Parse error: ${e.message}`, 'error');
+                }
+            };
+            
+            xhr.onerror = function() {
+                log('XHR Network Error', 'error');
+            };
+            
+            xhr.send();
+        }
+
+        // Auto-executar ao carregar
+        window.onload = () => {
+            log('Página carregada. Clique nos botões para testar.', 'info');
+        };
+    </script>
+</body>
+</html>

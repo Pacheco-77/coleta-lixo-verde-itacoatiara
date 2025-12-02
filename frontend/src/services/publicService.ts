@@ -11,7 +11,8 @@ export const getNews = async (params?: { limit?: number; category?: string }) =>
     console.log('🔍 Buscando notícias...', params);
     const response = await axios.get('/public/news', { 
       params,
-      timeout: 10000 // 10 segundos específico para notícias
+      timeout: 10000, // 10 segundos específico para notícias
+      withCredentials: false // Desabilitar credenciais para rotas públicas
     });
     console.log('📦 Response completo:', response);
     console.log('📄 Response.data:', response.data);
@@ -20,7 +21,10 @@ export const getNews = async (params?: { limit?: number; category?: string }) =>
     console.log('📰 Data length:', response.data?.data?.length);
     return response.data;
   } catch (error: any) {
-    console.error('❌ Erro ao buscar notícias:', error.message, error.response?.data);
+    console.error('❌ Erro ao buscar notícias:', error);
+    console.error('❌ Error.message:', error.message);
+    console.error('❌ Error.response:', error.response);
+    console.error('❌ Error.response?.data:', error.response?.data);
     // Retornar estrutura padrão em caso de erro
     return { success: false, count: 0, data: [], error: error.message };
   }

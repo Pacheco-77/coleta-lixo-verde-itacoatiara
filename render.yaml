@@ -23,7 +23,7 @@ services:
       - key: JWT_REFRESH_EXPIRE
         value: 30d
       - key: FRONTEND_URL
-        value: https://coleta-verde-frontend.onrender.com
+        value: https://coleta-lixo-verde-itacoatiara.onrender.com
       - key: TWO_FACTOR_APP_NAME
         value: Coleta Verde Itacoatiara
       - key: EMAIL_HOST
