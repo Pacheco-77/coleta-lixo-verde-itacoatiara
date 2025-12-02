@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'sonner';
 import PrivateRoute from './components/PrivateRoute';
@@ -40,22 +39,10 @@ import MapaTempoRealPage from './pages/admin/MapaTempoRealPage';
 // Other Pages
 import ProfilePage from './pages/ProfilePage';
 
-// Create a client
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      retry: 1,
-      staleTime: 5 * 60 * 1000, // 5 minutes
-    },
-  },
-});
-
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
+    <BrowserRouter>
+      <Routes>
           {/* Public Routes */}
           <Route path="/" element={<HomePage />} />
           <Route path="/mapa" element={<PublicMapPage />} />
@@ -105,14 +92,13 @@ function App() {
           {/* 404 - Redirect to home */}
           <Route path="*" element={<HomePage />} />
         </Routes>
+        
+        {/* Toast Notifications */}
+        <Toaster position="top-right" richColors />
+
+        {/* React Query Devtools */}
+        <ReactQueryDevtools initialIsOpen={false} />
       </BrowserRouter>
-
-      {/* Toast Notifications */}
-      <Toaster position="top-right" richColors />
-
-      {/* React Query Devtools */}
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
   );
 }
 

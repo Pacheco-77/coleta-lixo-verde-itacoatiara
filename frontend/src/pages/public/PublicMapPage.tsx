@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import L from 'leaflet';
@@ -155,8 +155,11 @@ const PublicMapPage = () => {
     (ponto) => filtroStatus === 'todos' || ponto.status === filtroStatus
   );
 
-  // Centro de Itacoatiara
-  const center: [number, number] = userLocation || [-3.1431, -58.4442];
+  // Centro de Itacoatiara - useMemo para evitar re-renders do mapa
+  const center: [number, number] = useMemo(() => 
+    userLocation || [-3.1431, -58.4442], 
+    [userLocation]
+  );
 
   if (loading) {
     return (
@@ -255,7 +258,7 @@ const PublicMapPage = () => {
 
       {/* Mapa */}
       <div className="flex-1 relative">
-        <MapWrapper center={center} zoom={14}>
+        <MapWrapper key="public-map" center={center} zoom={14}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

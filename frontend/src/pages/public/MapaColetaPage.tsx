@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -129,8 +129,8 @@ export default function MapaColeta() {
     );
   }
 
-  // Centro de Itacoatiara
-  const center: [number, number] = [-3.1431, -58.4442];
+  // Centro de Itacoatiara - useMemo para evitar re-renders
+  const center: [number, number] = useMemo(() => [-3.1431, -58.4442], []);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -171,7 +171,7 @@ export default function MapaColeta() {
       {/* Mapa */}
       <div className="container mx-auto p-4">
         <div className="bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: 'calc(100vh - 250px)' }}>
-          <MapWrapper center={center} zoom={14}>
+          <MapWrapper key="mapa-coleta" center={center} zoom={14}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

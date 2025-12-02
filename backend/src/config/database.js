@@ -58,42 +58,44 @@ async function seedPontosColeta() {
     if (count === 0) {
       logger.info('Populando banco de dados com pontos de coleta...');
       
-      // Coordenadas reais baseadas em Itacoatiara-AM (Centro: -3.1431, -58.4442)
+      // Coordenadas reais de Itacoatiara-AM (evitando o Rio Amazonas ao norte)
+      // Centro da cidade: -3.1431, -58.4442
+      // Limite norte (beira do rio): ~-3.135 (não usar valores menores)
       const pontosItacoatiara = [
         // Centro (5 pontos)
         { nomePonto: 'Praça da Matriz', logradouro: 'Praça da Matriz', bairro: 'Centro', latitude: -3.1431, longitude: -58.4442 },
         { nomePonto: 'Av. Parque', logradouro: 'Avenida Parque', bairro: 'Centro', latitude: -3.1445, longitude: -58.4465 },
         { nomePonto: 'Hospital Regional', logradouro: 'Rua do Hospital', bairro: 'Centro', latitude: -3.1418, longitude: -58.4428 },
-        { nomePonto: 'Porto de Itacoatiara', logradouro: 'Av. Beira Rio', bairro: 'Centro', latitude: -3.1410, longitude: -58.4480 },
+        { nomePonto: 'Porto de Itacoatiara', logradouro: 'Av. Beira Rio', bairro: 'Centro', latitude: -3.1405, longitude: -58.4455 },
         { nomePonto: 'Mercado Municipal', logradouro: 'Rua do Mercado', bairro: 'Centro', latitude: -3.1455, longitude: -58.4420 },
         
-        // Praça 14 (5 pontos - Norte)
-        { nomePonto: 'Praça 14 de Janeiro', logradouro: 'Rua Principal', bairro: 'Praça 14', latitude: -3.1350, longitude: -58.4400 },
-        { nomePonto: 'Igreja São Sebastião', logradouro: 'Rua São Sebastião', bairro: 'Praça 14', latitude: -3.1365, longitude: -58.4385 },
-        { nomePonto: 'Escola Estadual', logradouro: 'Av. Principal', bairro: 'Praça 14', latitude: -3.1380, longitude: -58.4415 },
-        { nomePonto: 'UBS Praça 14', logradouro: 'Rua da Saúde', bairro: 'Praça 14', latitude: -3.1340, longitude: -58.4390 },
-        { nomePonto: 'Campo de Futebol', logradouro: 'Rua do Estádio', bairro: 'Praça 14', latitude: -3.1370, longitude: -58.4425 },
+        // Zona Norte (5 pontos - próximo ao rio mas dentro da cidade)
+        { nomePonto: 'Praça 14 de Janeiro', logradouro: 'Rua Principal', bairro: 'Praça 14', latitude: -3.1395, longitude: -58.4400 },
+        { nomePonto: 'Igreja São Sebastião', logradouro: 'Rua São Sebastião', bairro: 'Praça 14', latitude: -3.1410, longitude: -58.4385 },
+        { nomePonto: 'Escola Estadual', logradouro: 'Av. Principal', bairro: 'Praça 14', latitude: -3.1385, longitude: -58.4415 },
+        { nomePonto: 'UBS Praça 14', logradouro: 'Rua da Saúde', bairro: 'Praça 14', latitude: -3.1400, longitude: -58.4430 },
+        { nomePonto: 'Campo de Futebol', logradouro: 'Rua do Estádio', bairro: 'Praça 14', latitude: -3.1420, longitude: -58.4405 },
         
-        // Iraci (5 pontos - Sul)
+        // Zona Sul (5 pontos)
         { nomePonto: 'Escola Municipal Iraci', logradouro: 'Rua Principal', bairro: 'Iraci', latitude: -3.1520, longitude: -58.4370 },
         { nomePonto: 'Posto de Saúde Iraci', logradouro: 'Av. Central', bairro: 'Iraci', latitude: -3.1535, longitude: -58.4355 },
         { nomePonto: 'Igreja Nossa Senhora', logradouro: 'Rua da Igreja', bairro: 'Iraci', latitude: -3.1510, longitude: -58.4385 },
-        { nomePonto: 'Quadra Poliesportiva', logradouro: 'Rua do Esporte', bairro: 'Iraci', latitude: -3.1545, longitude: -58.4340 },
-        { nomePonto: 'Terminal de Ônibus', logradouro: 'Av. Principal', bairro: 'Iraci', latitude: -3.1505, longitude: -58.4395 },
+        { nomePonto: 'Quadra Poliesportiva', logradouro: 'Rua do Esporte', bairro: 'Iraci', latitude: -3.1545, longitude: -58.4400 },
+        { nomePonto: 'Terminal de Ônibus', logradouro: 'Av. Principal', bairro: 'Iraci', latitude: -3.1505, longitude: -58.4415 },
         
-        // Mamoud Amed (5 pontos - Leste)
-        { nomePonto: 'Praça Central Mamoud', logradouro: 'Rua Central', bairro: 'Mamoud Amed', latitude: -3.1320, longitude: -58.4320 },
-        { nomePonto: 'Escola Mamoud Amed', logradouro: 'Av. Educação', bairro: 'Mamoud Amed', latitude: -3.1330, longitude: -58.4305 },
-        { nomePonto: 'Mercadinho Local', logradouro: 'Rua do Comércio', bairro: 'Mamoud Amed', latitude: -3.1310, longitude: -58.4335 },
-        { nomePonto: 'UBS Mamoud Amed', logradouro: 'Av. Saúde', bairro: 'Mamoud Amed', latitude: -3.1340, longitude: -58.4290 },
-        { nomePonto: 'Igreja Assembleia', logradouro: 'Rua da Fé', bairro: 'Mamoud Amed', latitude: -3.1300, longitude: -58.4350 },
+        // Zona Leste (5 pontos)
+        { nomePonto: 'Praça Central Mamoud', logradouro: 'Rua Central', bairro: 'Mamoud Amed', latitude: -3.1450, longitude: -58.4350 },
+        { nomePonto: 'Escola Mamoud Amed', logradouro: 'Av. Educação', bairro: 'Mamoud Amed', latitude: -3.1465, longitude: -58.4335 },
+        { nomePonto: 'Mercadinho Local', logradouro: 'Rua do Comércio', bairro: 'Mamoud Amed', latitude: -3.1435, longitude: -58.4365 },
+        { nomePonto: 'UBS Mamoud Amed', logradouro: 'Av. Saúde', bairro: 'Mamoud Amed', latitude: -3.1480, longitude: -58.4320 },
+        { nomePonto: 'Igreja Assembleia', logradouro: 'Rua da Fé', bairro: 'Mamoud Amed', latitude: -3.1440, longitude: -58.4380 },
         
-        // Zona Rural (5 pontos - Oeste/Sul)
-        { nomePonto: 'Centro Comunitário', logradouro: 'Av. Principal', bairro: 'Colônia', latitude: -3.1580, longitude: -58.4520 },
-        { nomePonto: 'Posto Colônia', logradouro: 'Rua da Saúde', bairro: 'Colônia', latitude: -3.1595, longitude: -58.4505 },
-        { nomePonto: 'Escola Rural', logradouro: 'Estrada da Colônia', bairro: 'Jauari', latitude: -3.1610, longitude: -58.4540 },
-        { nomePonto: 'Porto do Jauari', logradouro: 'Rua do Porto', bairro: 'Jauari', latitude: -3.1600, longitude: -58.4555 },
-        { nomePonto: 'Igreja do Jauari', logradouro: 'Rua Principal', bairro: 'Jauari', latitude: -3.1625, longitude: -58.4525 }
+        // Zona Oeste/Sudoeste (5 pontos)
+        { nomePonto: 'Centro Comunitário', logradouro: 'Av. Principal', bairro: 'Colônia', latitude: -3.1480, longitude: -58.4500 },
+        { nomePonto: 'Posto Colônia', logradouro: 'Rua da Saúde', bairro: 'Colônia', latitude: -3.1495, longitude: -58.4485 },
+        { nomePonto: 'Escola Rural', logradouro: 'Estrada da Colônia', bairro: 'Jauari', latitude: -3.1510, longitude: -58.4520 },
+        { nomePonto: 'Centro Cultural', logradouro: 'Rua do Porto', bairro: 'Jauari', latitude: -3.1500, longitude: -58.4535 },
+        { nomePonto: 'Igreja Comunitária', logradouro: 'Rua Principal', bairro: 'Jauari', latitude: -3.1525, longitude: -58.4505 }
       ];
       
       // Distribuir status: 60% pendente, 25% em_andamento, 15% concluido
