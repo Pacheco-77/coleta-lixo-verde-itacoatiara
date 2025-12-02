@@ -177,8 +177,17 @@ const HomePage = () => {
               </button>
             </div>
           ) : (
-            <div className="h-96 flex items-center justify-center bg-gray-100 rounded-2xl">
-              <p className="text-gray-500">Nenhuma notícia disponível no momento</p>
+            <div className="h-96 flex flex-col items-center justify-center bg-gray-100 rounded-2xl p-8">
+              <p className="text-gray-500 text-xl mb-4">Nenhuma notícia disponível no momento</p>
+              <div className="text-left bg-white p-4 rounded border text-sm max-w-2xl">
+                <p className="font-bold mb-2">🔍 Debug Info:</p>
+                <p>newsLoading: {newsLoading ? 'true' : 'false'}</p>
+                <p>news.length: {news.length}</p>
+                <p>newsData: {newsData ? 'existe' : 'undefined'}</p>
+                <p>newsData?.data: {newsData?.data ? 'existe' : 'undefined'}</p>
+                <p>newsData?.data length: {newsData?.data?.length || 0}</p>
+                <p>newsError: {newsError ? String(newsError) : 'nenhum'}</p>
+              </div>
             </div>
           )}
         </div>
