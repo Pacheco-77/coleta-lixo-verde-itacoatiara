@@ -5,9 +5,13 @@ const PontoColeta = require('../models/PontoColeta');
 // GET /api/pontos - Retorna todos os pontos com status atualizados
 router.get('/pontos', async (req, res) => {
   try {
+    console.log('📍 Buscando todos os pontos de coleta...');
+    
     const pontos = await PontoColeta.find()
       .populate('coletorId', 'name email')
       .sort({ updatedAt: -1 });
+    
+    console.log(`✅ ${pontos.length} pontos encontrados`);
     
     res.json({
       success: true,
@@ -15,7 +19,7 @@ router.get('/pontos', async (req, res) => {
       total: pontos.length,
     });
   } catch (error) {
-    console.error('Erro ao buscar pontos:', error);
+    console.error('❌ Erro ao buscar pontos:', error);
     res.status(500).json({
       success: false,
       message: 'Erro ao buscar pontos de coleta',
