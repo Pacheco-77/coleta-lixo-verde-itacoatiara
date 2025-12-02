@@ -189,7 +189,11 @@ const HomePage = () => {
                 <p>newsData.count: {(newsData as any)?.count || 0}</p>
                 <p>newsData.data: {(newsData as any)?.data ? 'existe' : 'undefined'}</p>
                 <p>newsData.data.length: {(newsData as any)?.data?.length || 0}</p>
+                <p>newsData.error: {(newsData as any)?.error || 'nenhum'}</p>
                 <p>newsError: {newsError ? String(newsError) : 'nenhum'}</p>
+                <p className="mt-2 font-bold text-red-600">
+                  ⚠️ ABRA O CONSOLE (F12) E ME ENVIE OS LOGS COM 🔍 📦 ❌
+                </p>
               </div>
             </div>
           )}
