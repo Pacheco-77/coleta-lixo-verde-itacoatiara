@@ -43,7 +43,7 @@ export const pontosService = {
         apiUrl = apiUrl + '/api';
       }
 
-      const url = `${apiUrl}/public/pontos`;
+      const url = `${apiUrl}/pontos`;
       const response = await fetch(url, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -82,7 +82,7 @@ export const pontosService = {
         apiUrl = apiUrl + '/api';
       }
 
-      const url = `${apiUrl}/public/pontos/${id}`;
+      const url = `${apiUrl}/pontos/${id}`;
       const response = await fetch(url, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -141,7 +141,7 @@ export const pontosService = {
         apiUrl = apiUrl + '/api';
       }
 
-      const url = `${apiUrl}/public/statistics`;
+      const url = `${apiUrl}/pontos/estatisticas`;
       const response = await fetch(url, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
