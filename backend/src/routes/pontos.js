@@ -28,6 +28,42 @@ router.get('/pontos', async (req, res) => {
   }
 });
 
+// GET /api/pontos/estatisticas - Estatísticas gerais (DEVE VIR ANTES DE /:id)
+router.get('/pontos/estatisticas', async (req, res) => {
+  try {
+    console.log('📊 Buscando estatísticas de pontos...');
+    
+    const total = await PontoColeta.countDocuments();
+    console.log('Total de pontos:', total);
+    
+    const pendentes = await PontoColeta.countDocuments({ status: 'pendente' });
+    const emAndamento = await PontoColeta.countDocuments({ status: 'em_andamento' });
+    const concluidos = await PontoColeta.countDocuments({ status: 'concluido' });
+    
+    const stats = {
+      total,
+      pendentes,
+      emAndamento,
+      concluidos,
+      percentualConcluido: total > 0 ? Math.round((concluidos / total) * 100) : 0,
+    };
+    
+    console.log('✅ Estatísticas:', stats);
+    
+    res.json({
+      success: true,
+      data: stats,
+    });
+  } catch (error) {
+    console.error('❌ Erro ao buscar estatísticas:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erro ao buscar estatísticas',
+      error: error.message,
+    });
+  }
+});
+
 // GET /api/pontos/:id - Retorna um ponto específico
 router.get('/pontos/:id', async (req, res) => {
   try {
@@ -81,48 +117,6 @@ router.post('/pontos/:id/checkin', async (req, res) => {
       success: false,
       message: 'Erro ao registrar coleta',
       error: error.message,
-    });
-  }
-});
-
-// GET /api/pontos/estatisticas - Estatísticas gerais
-router.get('/estatisticas', async (req, res) => {
-  try {
-    console.log('📊 Buscando estatísticas de pontos...');
-    
-    // Verificar se o modelo está disponível
-    if (!PontoColeta) {
-      throw new Error('Modelo PontoColeta não disponível');
-    }
-    
-    const total = await PontoColeta.countDocuments();
-    console.log('Total de pontos:', total);
-    
-    const pendentes = await PontoColeta.countDocuments({ status: 'pendente' });
-    const emAndamento = await PontoColeta.countDocuments({ status: 'em_andamento' });
-    const concluidos = await PontoColeta.countDocuments({ status: 'concluido' });
-    
-    const stats = {
-      total,
-      pendentes,
-      emAndamento,
-      concluidos,
-      percentualConcluido: total > 0 ? Math.round((concluidos / total) * 100) : 0,
-    };
-    
-    console.log('✅ Estatísticas:', stats);
-    
-    res.json({
-      success: true,
-      data: stats,
-    });
-  } catch (error) {
-    console.error('❌ Erro ao buscar estatísticas:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Erro ao buscar estatísticas',
-      error: error.message,
-      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined,
     });
   }
 });
