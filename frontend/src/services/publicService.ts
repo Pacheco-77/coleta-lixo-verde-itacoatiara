@@ -8,22 +8,15 @@ import { PublicStatistics, ContactInfo } from '@/types';
 // Notícias - Versão com fetch nativo para evitar problemas do axios
 export const getNews = async (params?: { limit?: number; category?: string }) => {
   try {
-    console.log('🔍 Buscando notícias...', params);
-    
     let apiUrl = import.meta.env.VITE_API_URL || 'https://coleta-lixo-api.onrender.com/api';
-    console.log('🔧 VITE_API_URL:', import.meta.env.VITE_API_URL);
-    console.log('🔧 apiUrl antes:', apiUrl);
     
     // Garantir que tem /api no final
     if (!apiUrl.endsWith('/api')) {
       apiUrl = apiUrl + '/api';
     }
-    console.log('🔧 apiUrl depois:', apiUrl);
     
     const queryString = params ? `?${new URLSearchParams(params as any).toString()}` : '';
     const url = `${apiUrl}/public/news${queryString}`;
-    
-    console.log('🌐 URL completa:', url);
     
     const response = await fetch(url, {
       method: 'GET',
@@ -31,29 +24,17 @@ export const getNews = async (params?: { limit?: number; category?: string }) =>
         'Content-Type': 'application/json',
       },
       mode: 'cors',
-      credentials: 'omit', // Não enviar cookies
+      credentials: 'omit',
     });
-    
-    console.log('📦 Response status:', response.status);
-    console.log('📦 Response ok:', response.ok);
     
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
     
     const data = await response.json();
-    
-    console.log('📄 Response.data:', data);
-    console.log('✅ Success?', data?.success);
-    console.log('📊 Count:', data?.count);
-    console.log('📰 Data length:', data?.data?.length);
-    
     return data;
   } catch (error: any) {
-    console.error('❌ Erro ao buscar notícias:', error);
-    console.error('❌ Error.message:', error.message);
-    console.error('❌ Error.stack:', error.stack);
-    // Retornar estrutura padrão em caso de erro
+    console.error('Erro ao buscar notícias:', error.message);
     return { success: false, count: 0, data: [], error: error.message };
   }
 };

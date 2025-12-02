@@ -29,17 +29,7 @@ const HomePage = () => {
   const news: News[] = (newsData as any)?.data || [];
   const stats = (statsData as any)?.data;
 
-  // Debug logs detalhados
-  useEffect(() => {
-    console.log('=== DEBUG NOTÍCIAS ===');
-    console.log('newsData completo:', newsData);
-    console.log('newsData?.data:', newsData?.data);
-    console.log('news array final:', news);
-    console.log('news.length:', news.length);
-    console.log('newsLoading:', newsLoading);
-    console.log('newsError:', newsError);
-    console.log('======================');
-  }, [newsData, news, newsLoading, newsError]);
+
 
   // Auto-play do carrossel
   useEffect(() => {
@@ -178,23 +168,8 @@ const HomePage = () => {
               </button>
             </div>
           ) : (
-            <div className="h-96 flex flex-col items-center justify-center bg-gray-100 rounded-2xl p-8">
-              <p className="text-gray-500 text-xl mb-4">Nenhuma notícia disponível no momento</p>
-              <div className="text-left bg-white p-4 rounded border text-sm max-w-2xl">
-                <p className="font-bold mb-2">🔍 Debug Info:</p>
-                <p>newsLoading: {newsLoading ? 'true' : 'false'}</p>
-                <p>news.length: {news.length}</p>
-                <p>newsData: {newsData ? 'existe' : 'undefined'}</p>
-                <p>newsData.success: {(newsData as any)?.success ? 'true' : 'false'}</p>
-                <p>newsData.count: {(newsData as any)?.count || 0}</p>
-                <p>newsData.data: {(newsData as any)?.data ? 'existe' : 'undefined'}</p>
-                <p>newsData.data.length: {(newsData as any)?.data?.length || 0}</p>
-                <p>newsData.error: {(newsData as any)?.error || 'nenhum'}</p>
-                <p>newsError: {newsError ? String(newsError) : 'nenhum'}</p>
-                <p className="mt-2 font-bold text-red-600">
-                  ⚠️ ABRA O CONSOLE (F12) E ME ENVIE OS LOGS COM 🔍 📦 ❌
-                </p>
-              </div>
+            <div className="h-96 flex items-center justify-center bg-gray-100 rounded-2xl">
+              <p className="text-gray-500">Nenhuma notícia disponível no momento</p>
             </div>
           )}
         </div>
