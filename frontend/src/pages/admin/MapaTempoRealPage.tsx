@@ -1,7 +1,8 @@
 import { useEffect, useState, useMemo } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import MapWrapper from '../../components/MapWrapper';
 import { pontosService, PontoColeta, EstatisticasPontos } from '../../services/pontosService';
 
 // Fix do ícone padrão do Leaflet
@@ -212,7 +213,7 @@ export default function MapaTempoReal() {
       </div>
 
       {/* Mapa */}
-      <div className="flex-1 relative" key="mapa-tempo-real-container">
+      <div className="flex-1 relative">
         {!mapLoaded ? (
           <div className="flex items-center justify-center h-full bg-gray-100">
             <div className="text-center">
@@ -221,13 +222,7 @@ export default function MapaTempoReal() {
             </div>
           </div>
         ) : (
-          <MapContainer
-            key="mapa-tempo-real"
-            center={center}
-            zoom={14}
-            style={{ height: '100%', width: '100%' }}
-            scrollWheelZoom={true}
-          >
+          <MapWrapper center={center} zoom={14}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -268,7 +263,7 @@ export default function MapaTempoReal() {
               </Popup>
             </Marker>
           ))}
-          </MapContainer>
+          </MapWrapper>
         )}
       </div>
     </div>
