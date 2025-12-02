@@ -79,20 +79,20 @@ const HomePage = () => {
               </div>
             </div>
             <nav className="flex items-center gap-4">
-              <Link to="/mapa" className="hover:text-green-200 transition">
-                Mapa
+              <Link to="/mapa" className="text-white font-medium hover:text-green-200 transition-colors px-3 py-2 rounded-lg hover:bg-green-600">
+                🗺️ Mapa
               </Link>
-              <Link to="/mapa-coleta" className="hover:text-green-200 transition">
-                Mapa de Coleta
+              <Link to="/mapa-coleta" className="text-white font-medium hover:text-green-200 transition-colors px-3 py-2 rounded-lg hover:bg-green-600">
+                📍 Mapa de Coleta
               </Link>
               <Link to="/login">
-                <Button variant="outline" className="bg-white text-green-700 hover:bg-green-50">
+                <Button variant="outline" className="bg-white !text-green-700 border-2 border-white hover:bg-green-50 font-semibold">
                   Entrar
                 </Button>
               </Link>
               <Link to="/register">
-                <Button className="bg-white text-verde-escuro hover:bg-green-50 border-2 border-verde-escuro font-semibold">
-                  Cadastrar
+                <Button className="bg-yellow-400 !text-green-900 hover:bg-yellow-300 border-2 border-yellow-500 font-bold shadow-lg">
+                  Cadastrar Grátis
                 </Button>
               </Link>
             </nav>
@@ -282,13 +282,13 @@ const HomePage = () => {
           </p>
           <div className="flex gap-4 justify-center">
             <Link to="/register">
-              <Button size="lg" className="bg-white !text-[#2E7D32] hover:bg-green-50 font-bold shadow-md">
-                Criar Conta Grátis
+              <Button size="lg" className="bg-yellow-400 !text-green-900 hover:bg-yellow-300 border-2 border-yellow-500 font-bold shadow-xl transform hover:scale-105 transition-all">
+                🚀 Criar Conta Grátis
               </Button>
             </Link>
             <Link to="/mapa">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-green-600">
-                Ver Mapa de Coletas
+              <Button size="lg" className="bg-white !text-green-700 hover:bg-green-50 border-2 border-white font-bold shadow-xl transform hover:scale-105 transition-all">
+                🗺️ Ver Mapa de Coletas
               </Button>
             </Link>
           </div>
