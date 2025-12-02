@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
+import { TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { ArrowLeft, Leaf, MapPin, Calendar, Clock, CheckCircle, AlertCircle } from 'lucide-react';
 import Button from '@/components/ui/Button';
+import MapWrapper from '@/components/MapWrapper';
 import { pontosService, PontoColeta } from '@/services/pontosService';
 
 // Fix do ícone padrão do Leaflet
@@ -254,11 +255,7 @@ const PublicMapPage = () => {
 
       {/* Mapa */}
       <div className="flex-1 relative">
-        <MapContainer
-          center={center}
-          zoom={14}
-          style={{ height: '100%', width: '100%' }}
-        >
+        <MapWrapper center={center} zoom={14}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -370,7 +367,7 @@ const PublicMapPage = () => {
               </Marker>
             );
           })}
-        </MapContainer>
+        </MapWrapper>
       </div>
 
       {/* Legenda flutuante */}

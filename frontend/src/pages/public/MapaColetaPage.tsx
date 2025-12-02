@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import MapWrapper from '../../components/MapWrapper';
 import { pontosService, PontoColeta } from '../../services/pontosService';
 
 // Fix do ícone padrão do Leaflet
@@ -170,11 +171,7 @@ export default function MapaColeta() {
       {/* Mapa */}
       <div className="container mx-auto p-4">
         <div className="bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: 'calc(100vh - 250px)' }}>
-          <MapContainer
-            center={center}
-            zoom={14}
-            style={{ height: '100%', width: '100%' }}
-          >
+          <MapWrapper center={center} zoom={14}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -218,7 +215,7 @@ export default function MapaColeta() {
                 </Popup>
               </Marker>
             ))}
-          </MapContainer>
+          </MapWrapper>
         </div>
       </div>
     </div>

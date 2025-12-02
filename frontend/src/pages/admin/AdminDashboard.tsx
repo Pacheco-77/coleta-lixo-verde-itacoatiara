@@ -82,7 +82,7 @@ const AdminDashboard = () => {
         </div>
         
         <div className="mt-8">
-          <Outlet key={location.pathname} />
+          <Outlet />
         </div>
       </main>
     </div>
