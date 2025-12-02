@@ -25,8 +25,9 @@ const HomePage = () => {
     queryFn: () => publicService.getPublicStatistics(),
   });
 
-  const news: News[] = newsData?.data || [];
-  const stats = statsData?.data;
+  // newsData já é {success, count, data: [...]} então acessamos diretamente
+  const news: News[] = (newsData as any)?.data || [];
+  const stats = (statsData as any)?.data;
 
   // Debug logs detalhados
   useEffect(() => {
@@ -184,8 +185,10 @@ const HomePage = () => {
                 <p>newsLoading: {newsLoading ? 'true' : 'false'}</p>
                 <p>news.length: {news.length}</p>
                 <p>newsData: {newsData ? 'existe' : 'undefined'}</p>
-                <p>newsData?.data: {newsData?.data ? 'existe' : 'undefined'}</p>
-                <p>newsData?.data length: {newsData?.data?.length || 0}</p>
+                <p>newsData.success: {(newsData as any)?.success ? 'true' : 'false'}</p>
+                <p>newsData.count: {(newsData as any)?.count || 0}</p>
+                <p>newsData.data: {(newsData as any)?.data ? 'existe' : 'undefined'}</p>
+                <p>newsData.data.length: {(newsData as any)?.data?.length || 0}</p>
                 <p>newsError: {newsError ? String(newsError) : 'nenhum'}</p>
               </div>
             </div>
