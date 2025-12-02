@@ -1,5 +1,3 @@
-import axios from '../lib/axios';
-
 export interface PontoColeta {
   _id: string;
   nomePonto: string;
@@ -40,10 +38,25 @@ export const pontosService = {
         return pontosCache.data;
       }
 
-      console.log('Buscando pontos de coleta...');
-      const response = await axios.get('/pontos', { timeout: 10000 });
-      console.log('Resposta da API pontos:', response.data);
-      const data = response.data.data;
+      let apiUrl = import.meta.env.VITE_API_URL || 'https://coleta-lixo-api.onrender.com/api';
+      if (!apiUrl.endsWith('/api')) {
+        apiUrl = apiUrl + '/api';
+      }
+
+      const url = `${apiUrl}/public/pontos`;
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        mode: 'cors',
+        credentials: 'omit',
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const result = await response.json();
+      const data = result.data || [];
       
       // Atualizar cache
       pontosCache = { data, timestamp: Date.now() };
@@ -51,23 +64,40 @@ export const pontosService = {
       
       return data;
     } catch (error: any) {
-      console.error('Erro ao listar pontos:', error.message, error.response?.data);
+      console.error('Erro ao listar pontos:', error.message);
       // Retornar cache antigo se disponível
       if (pontosCache) {
         console.log('Retornando cache antigo devido ao erro');
         return pontosCache.data;
       }
-      throw error;
+      return []; // Retornar array vazio em vez de throw
     }
   },
 
   // Buscar um ponto específico
   async buscarPonto(id: string): Promise<PontoColeta> {
     try {
-      const response = await axios.get(`/pontos/${id}`, { timeout: 8000 });
-      return response.data.data;
-    } catch (error) {
-      console.error('Erro ao buscar ponto:', error);
+      let apiUrl = import.meta.env.VITE_API_URL || 'https://coleta-lixo-api.onrender.com/api';
+      if (!apiUrl.endsWith('/api')) {
+        apiUrl = apiUrl + '/api';
+      }
+
+      const url = `${apiUrl}/public/pontos/${id}`;
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        mode: 'cors',
+        credentials: 'omit',
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const result = await response.json();
+      return result.data;
+    } catch (error: any) {
+      console.error('Erro ao buscar ponto:', error.message);
       throw error;
     }
   },
@@ -75,12 +105,30 @@ export const pontosService = {
   // Registrar check-in de coleta
   async registrarCheckIn(id: string, coletorId: string): Promise<PontoColeta> {
     try {
-      const response = await axios.post(`/pontos/${id}/checkin`, { coletorId }, { timeout: 8000 });
+      let apiUrl = import.meta.env.VITE_API_URL || 'https://coleta-lixo-api.onrender.com/api';
+      if (!apiUrl.endsWith('/api')) {
+        apiUrl = apiUrl + '/api';
+      }
+
+      const url = `${apiUrl}/collector/pontos/${id}/checkin`;
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ coletorId }),
+        mode: 'cors',
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const result = await response.json();
       // Limpar cache após modificação
       pontosCache = null;
-      return response.data.data;
-    } catch (error) {
-      console.error('Erro ao registrar check-in:', error);
+      return result.data;
+    } catch (error: any) {
+      console.error('Erro ao registrar check-in:', error.message);
       throw error;
     }
   },
@@ -88,11 +136,28 @@ export const pontosService = {
   // Buscar estatísticas
   async buscarEstatisticas(): Promise<EstatisticasPontos> {
     try {
-      const response = await axios.get('/estatisticas', { timeout: 5000 });
-      return response.data.data;
-    } catch (error) {
-      console.error('Erro ao buscar estatísticas:', error);
-      throw error;
+      let apiUrl = import.meta.env.VITE_API_URL || 'https://coleta-lixo-api.onrender.com/api';
+      if (!apiUrl.endsWith('/api')) {
+        apiUrl = apiUrl + '/api';
+      }
+
+      const url = `${apiUrl}/public/statistics`;
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        mode: 'cors',
+        credentials: 'omit',
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const result = await response.json();
+      return result.data || { total: 0, pendentes: 0, emAndamento: 0, concluidos: 0, percentualConcluido: 0 };
+    } catch (error: any) {
+      console.error('Erro ao buscar estatísticas:', error.message);
+      return { total: 0, pendentes: 0, emAndamento: 0, concluidos: 0, percentualConcluido: 0 };
     }
   },
 };
