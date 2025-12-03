@@ -12,7 +12,7 @@ A persona representa o cidadão comum do município, que precisa de informaçõe
 
 A persona do coletor demonstra o perfil do trabalhador responsável pela execução da coleta, que necessita de rotas bem definidas, informações rápidas e registro das coletas realizadas. Sua prioridade é otimizar o tempo e evitar retrabalhos devido à falta de comunicação.
 
-<img width="1654" height="1772" alt="Persona2_ Coletor" src="https://github.com/user-attachments/assets/dca31bb7-86bb-4b83-b8e7-1add9281c442" />
+<img width="1654" height="1772" alt="Persona2_ Coletor" src="https://github.com/user-attachments/assets/50dfd702-2b8e-488a-9719-bb9d9378b9b4" />
 
 ## Persona 3: Usuário Gestor - Admin
 
