@@ -183,9 +183,9 @@ const PublicMapPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="h-screen bg-gray-50 flex flex-col overflow-hidden">
       {/* Header */}
-      <header className="bg-verde-escuro text-white shadow-lg">
+      <header className="bg-verde-escuro text-white shadow-lg flex-shrink-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -208,7 +208,7 @@ const PublicMapPage = () => {
       </header>
 
       {/* Filtros */}
-      <div className="bg-white shadow-sm border-b">
+      <div className="bg-white shadow-sm border-b flex-shrink-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-wrap items-center gap-3">
             <span className="text-sm font-semibold text-gray-700">Filtrar por:</span>
