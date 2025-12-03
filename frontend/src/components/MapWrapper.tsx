@@ -79,9 +79,9 @@ export default function MapWrapper({ center, zoom, children }: MapWrapperProps) 
         zoom={zoom}
         style={{ height: '100%', width: '100%' }}
         scrollWheelZoom={true}
-        whenCreated={(mapInstance) => {
-          if (!mapInstanceRef.current) {
-            mapInstanceRef.current = mapInstance;
+        ref={(map) => {
+          if (map && !mapInstanceRef.current) {
+            mapInstanceRef.current = map;
           }
         }}
       >
