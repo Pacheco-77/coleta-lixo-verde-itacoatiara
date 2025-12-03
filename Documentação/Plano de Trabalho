@@ -1,1 +1,176 @@
+# 🌱 Sistema de Coleta de Lixo Verde — Itacoatiara/AM
+
+Este projeto apresenta o desenvolvimento de um aplicativo voltado ao gerenciamento e melhoria
+da coleta de lixo verde no município de Itacoatiara-AM, promovendo eficiência operacional,
+participação ativa dos cidadãos e comunicação direta com a gestão pública municipal.
+
+---
+
+## 📍 Contextualização do Problema
+
+O município de Itacoatiara enfrenta dificuldades na execução do cronograma oficial da coleta de
+lixo verde. Devido a atrasos e inconsistências na prestação do serviço, resíduos como galhos,
+folhas e restos de poda permanecem acumulados por longos períodos em vias públicas.
+
+Essa situação leva a:
+
+- Proliferação de animais peçonhentos  
+- Obstrução de vias e calçadas  
+- Riscos de queimadas irregulares  
+- Sensação de abandono pela população  
+
+Além disso, **não existe um canal estruturado** para denúncias, solicitações e acompanhamento
+em tempo real da coleta.
+
+➡️ Surge então a necessidade de um sistema tecnológico que conecte **cidadãos**, **coletores**
+e **gestores**.
+
+---
+
+## 🎯 Objetivo Geral
+
+Desenvolver um aplicativo para gerenciamento da coleta de lixo verde em Itacoatiara-AM.
+
+### 📌 Objetivos Específicos
+
+- Cadastrar pontos de descarte
+- Permitir agendamento de coleta
+- Registrar denúncias de descarte irregular
+- Disponibilizar mapa por zonas da cidade
+- Integrar cidadão, coletor e gestor em um único sistema
+
+---
+
+## 👥 Tipos de Usuários
+
+| Perfil | Funções principais |
+|--------|------------------|
+| 🧍 Cidadão | Solicitar coleta, denunciar descarte irregular, acompanhar status |
+| 🚛 Coletor | Registrar coleta realizada, visualizar rotas e demandas |
+| 🏛️ Gestor | Gerenciar usuários, relatórios, denúncias e agendamentos |
+
+---
+
+## 🧩 Requisitos do Sistema
+
+### 🔹 Requisitos Funcionais (RF)
+
+| Código | Nome | Descrição |
+|--------|------|-----------|
+| RF01 | Cadastrar Item de Lixo Verde | Cidadão informa item, localização e imagem |
+| RF02 | Localização Automática | Uso de GPS para registro do ponto exato |
+| RF03 | Agendar Coleta | Escolha de data/rota conforme cronograma |
+| RF04 | Enviar Denúncia | Anexo de foto e localização |
+| RF05 | Enviar Imagens | Auxilia identificação do volume do lixo |
+| RF06 | Login e Níveis de Acesso | Acesso diferenciado por tipo de usuário |
+| RF07 | Mapa por Zonas | Exibe solicitações e denúncias no mapa |
+| RF08 | Coletor Registrar Coleta | Atualização do status em tempo real |
+| RF09 | Módulo de Comunicação | Avisos e notificações ao usuário |
+| RF10 | Gestão de Usuários | Função exclusiva do Gestor |
+| RF11 | Relatórios e Estatísticas | Dados gerenciais para tomada de decisões |
+
+---
+
+### 🔸 Requisitos Não Funcionais (RNF)
+
+| Código | Nome | Descrição |
+|--------|------|-----------|
+| RNF01 | Interface Responsiva | Adaptável a smartphone e web |
+| RNF02 | Segurança e Criptografia | Proteção de dados do usuário |
+| RNF03 | Tempo de Resposta ≤ 5s | Agilidade na experiência |
+| RNF04 | Disponibilidade ≥ 90% | Alta confiabilidade |
+| RNF05 | Compatibilidade Android e Web | Fácil acesso em diversos dispositivos |
+| RNF06 | Armazenamento Seguro | Evitar perda de dados |
+| RNF07 | Usabilidade Intuitiva | Para usuários com baixa alfabetização digital |
+| RNF08 | Acessibilidade | Aderência à WCAG |
+
+---
+
+## 🛠️ Funcionalidades do Sistema
+
+- Cadastro de itens e envio de imagens
+- Denúncia de descarte irregular
+- Mapa interativo por zonas
+- Agendamento da coleta
+- Notificações automáticas
+- Gestão de usuários e métricas
+- Registro da coleta pelo coletor
+
+---
+
+## 🧪 Metodologia
+
+- Entrevistas com moradores
+- Identificação de problemas reais da coleta municipal
+- Levantamento de requisitos
+- Prototipação e validação das telas
+
+---
+
+## 🖼️ Protótipos
+
+> 📌 As imagens serão adicionadas conforme evolução do projeto.
+
+- Tela de Login
+- Dashboard do Cidadão
+- Tela do Coletor
+- Mapa Interativo com zonas
+- Gerenciamento do Gestor
+
+*(Inserir imagens em breve)*
+
+---
+
+## 🧩 Modelagem (UML)
+
+Diagramas utilizados:
+
+- Casos de Uso
+- Classes
+- Atividades
+- Sequência
+- Estados
+- Componentes
+- Implantação
+- Diagrama ER
+
+📌 **Todos ficarão disponíveis em `/docs/modelagem/`**
+
+---
+
+## 🧠 Diagramas MoLIC
+
+Modelagem de interação usuário-sistema
+
+📌 Local: `/docs/diagramas-MoLIC/`
+
+---
+
+## 📍 Jornada dos Usuários
+
+📌 Local: `/docs/jornada-usuarios/`
+
+---
+
+## 📚 Referências
+
+📌 Local: `/docs/referencias/`
+
+---
+
+## ✨ Contribuições
+
+Sinta-se à vontade para contribuir com melhorias e sugestões!  
+Abra uma *issue* ou envie um *pull request* 🚀
+
+---
+
+## 👩‍💻 Autora
+
+**Ana Paula Guimarães Xavier**  
+Estudante de Análise e Desenvolvimento de Sistemas  
+Instituto de Ensino Superior — Itacoatiara/AM  
+
+---
+
 
