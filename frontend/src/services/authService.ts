@@ -4,8 +4,15 @@ import { AuthResponse, LoginCredentials, RegisterData, User, ApiResponse } from 
 export const authService = {
   // Register new user
   register: async (data: RegisterData): Promise<AuthResponse> => {
-    const response = await api.post<AuthResponse>('/api/auth/register', data);
-    return response.data;
+    const response = await api.post<{ success: boolean; message: string; data: AuthResponse }>('/api/auth/register', data);
+    // A API retorna { success, message, data: { user, token, refreshToken } }
+    return {
+      success: response.data.success,
+      message: response.data.message,
+      user: response.data.data.user,
+      token: response.data.data.token,
+      refreshToken: response.data.data.refreshToken,
+    };
   },
 
   // Login

@@ -44,7 +44,15 @@ const RegisterPage = () => {
       
       setAuth(response.user, response.token, response.refreshToken);
       toast.success('Cadastro realizado com sucesso!');
-      navigate('/cidadao/dashboard');
+      
+      // Redirecionar baseado no role do usuário
+      if (response.user.role === 'admin') {
+        navigate('/admin');
+      } else if (response.user.role === 'coletor') {
+        navigate('/coletor/dashboard');
+      } else {
+        navigate('/usuario/dashboard');
+      }
     } catch (error: unknown) {
       toast.error(handleApiError(error));
     } finally {
