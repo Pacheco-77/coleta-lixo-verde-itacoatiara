@@ -24,9 +24,13 @@ Desenvolver um aplicativo para gerenciamento da coleta de lixo verde no municíp
 
 ## OBJETIVOS ESPECÍFICOS:
 •	Cadastrar pontos de descarte.
+
 •	Permitir agendamento de coleta.
+
 •	Registrar denúncias de descarte irregular.
+
 •	Usar mapa por zonas para facilitar a visualização.
+
 •	Integrar cidadão, coletor e gestor em um único sistema.
 
 
