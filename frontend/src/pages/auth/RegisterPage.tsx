@@ -125,6 +125,9 @@ const RegisterPage = () => {
                   <Eye className="h-5 w-5" />
                 )}
               </button>
+              <p className="mt-1 text-xs text-gray-500">
+                Mínimo 8 caracteres: letras maiúsculas, minúsculas, números e especiais (@$!%*?&)
+              </p>
             </div>
 
             <div className="relative">
