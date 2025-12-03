@@ -38,6 +38,7 @@ import MapaTempoRealPage from './pages/admin/MapaTempoRealPage';
 
 // Other Pages
 import ProfilePage from './pages/ProfilePage';
+import UnauthorizedPage from './pages/UnauthorizedPage';
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
           <Route path="/checkin/:id" element={<CheckInPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
           {/* User Routes (anteriormente Citizen) */}
           <Route element={<PrivateRoute allowedRoles={['user']} />}>
