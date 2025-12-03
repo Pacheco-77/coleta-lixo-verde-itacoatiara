@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer } from 'react-leaflet';
 import L from 'leaflet';
 
 interface MapWrapperProps {
@@ -9,15 +9,20 @@ interface MapWrapperProps {
 }
 
 /**
- * Wrapper para MapContainer que previne o erro insertBefore
- * ao garantir que o mapa só é montado uma vez e com DOM estável
+ * Wrapper para MapContainer que previne erros do Leaflet
+ * Garante que o mapa seja montado corretamente e limpo ao desmontar
  */
 export default function MapWrapper({ center, zoom, children }: MapWrapperProps) {
   const [isReady, setIsReady] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
+  const hasInitialized = useRef(false);
 
   useEffect(() => {
+    // Previne inicialização dupla
+    if (hasInitialized.current) return;
+    hasInitialized.current = true;
+
     // Delay para garantir DOM estável
     const timer = setTimeout(() => {
       setIsReady(true);
@@ -25,11 +30,27 @@ export default function MapWrapper({ center, zoom, children }: MapWrapperProps) 
 
     return () => {
       clearTimeout(timer);
-      // Cleanup do mapa ao desmontar
+      
+      // Cleanup completo do mapa ao desmontar
       if (mapInstanceRef.current) {
-        mapInstanceRef.current.remove();
+        try {
+          mapInstanceRef.current.off();
+          mapInstanceRef.current.remove();
+        } catch (e) {
+          console.warn('Erro ao remover mapa:', e);
+        }
         mapInstanceRef.current = null;
       }
+      
+      // Limpa o container DOM
+      if (containerRef.current) {
+        const container = containerRef.current.querySelector('.leaflet-container');
+        if (container && container.parentNode) {
+          container.parentNode.removeChild(container);
+        }
+      }
+      
+      hasInitialized.current = false;
     };
   }, []);
 
@@ -45,14 +66,17 @@ export default function MapWrapper({ center, zoom, children }: MapWrapperProps) 
   }
 
   return (
-    <div ref={containerRef} className="w-full h-full">
+    <div ref={containerRef} className="w-full h-full" key="map-container">
       <MapContainer
         center={center}
         zoom={zoom}
         style={{ height: '100%', width: '100%' }}
         scrollWheelZoom={true}
+        whenReady={() => {
+          // Mapa pronto para uso
+        }}
         ref={(mapInstance) => {
-          if (mapInstance) {
+          if (mapInstance && !mapInstanceRef.current) {
             mapInstanceRef.current = mapInstance;
           }
         }}
