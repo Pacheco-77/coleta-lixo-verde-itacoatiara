@@ -17,15 +17,21 @@ export const authService = {
 
   // Login
   login: async (credentials: LoginCredentials): Promise<AuthResponse> => {
-    const response = await api.post<{ success: boolean; message: string; data: AuthResponse }>('/api/auth/login', credentials);
-    // A API retorna { success, message, data: { user, token, refreshToken } }
-    return {
-      success: response.data.success,
-      message: response.data.message,
-      user: response.data.data.user,
-      token: response.data.data.token,
-      refreshToken: response.data.data.refreshToken,
-    };
+    try {
+      const response = await api.post<{ success: boolean; message: string; data: AuthResponse }>('/api/auth/login', credentials);
+      // A API retorna { success, message, data: { user, token, refreshToken } }
+      return {
+        success: response.data.success,
+        message: response.data.message,
+        user: response.data.data.user,
+        token: response.data.data.token,
+        refreshToken: response.data.data.refreshToken,
+      };
+    } catch (error: any) {
+      // Em caso de erro 401, a resposta pode não ter a estrutura esperada
+      console.error('❌ Login Error:', error);
+      throw error;
+    }
   },
 
   // Logout

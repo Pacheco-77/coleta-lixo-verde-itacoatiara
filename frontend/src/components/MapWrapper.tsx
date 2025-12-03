@@ -10,47 +10,53 @@ interface MapWrapperProps {
 
 /**
  * Wrapper para MapContainer que previne erros do Leaflet
- * Garante que o mapa seja montado corretamente e limpo ao desmontar
+ * Usa ID único para garantir que cada mapa tenha seu próprio container
  */
 export default function MapWrapper({ center, zoom, children }: MapWrapperProps) {
   const [isReady, setIsReady] = useState(false);
+  const [mapId] = useState(() => `map-${Math.random().toString(36).substr(2, 9)}`);
   const containerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
-  const hasInitialized = useRef(false);
+  const cleanupDoneRef = useRef(false);
 
   useEffect(() => {
-    // Previne inicialização dupla
-    if (hasInitialized.current) return;
-    hasInitialized.current = true;
-
     // Delay para garantir DOM estável
     const timer = setTimeout(() => {
       setIsReady(true);
-    }, 100);
+    }, 150);
 
     return () => {
       clearTimeout(timer);
       
+      // Previne múltiplas execuções do cleanup
+      if (cleanupDoneRef.current) return;
+      cleanupDoneRef.current = true;
+      
       // Cleanup completo do mapa ao desmontar
       if (mapInstanceRef.current) {
         try {
+          // Remove todos os event listeners
           mapInstanceRef.current.off();
+          // Remove o mapa
           mapInstanceRef.current.remove();
         } catch (e) {
-          console.warn('Erro ao remover mapa:', e);
+          // Ignora erros de cleanup
+        } finally {
+          mapInstanceRef.current = null;
         }
-        mapInstanceRef.current = null;
       }
       
-      // Limpa o container DOM
+      // Limpa o container DOM diretamente
       if (containerRef.current) {
-        const container = containerRef.current.querySelector('.leaflet-container');
-        if (container && container.parentNode) {
-          container.parentNode.removeChild(container);
+        try {
+          const leafletContainer = containerRef.current.querySelector('.leaflet-container');
+          if (leafletContainer) {
+            leafletContainer.remove();
+          }
+        } catch (e) {
+          // Ignora erros de limpeza DOM
         }
       }
-      
-      hasInitialized.current = false;
     };
   }, []);
 
@@ -66,17 +72,15 @@ export default function MapWrapper({ center, zoom, children }: MapWrapperProps) 
   }
 
   return (
-    <div ref={containerRef} className="w-full h-full" key="map-container">
+    <div ref={containerRef} className="w-full h-full" id={mapId}>
       <MapContainer
+        key={mapId}
         center={center}
         zoom={zoom}
         style={{ height: '100%', width: '100%' }}
         scrollWheelZoom={true}
-        whenReady={() => {
-          // Mapa pronto para uso
-        }}
-        ref={(mapInstance) => {
-          if (mapInstance && !mapInstanceRef.current) {
+        whenCreated={(mapInstance) => {
+          if (!mapInstanceRef.current) {
             mapInstanceRef.current = mapInstance;
           }
         }}
