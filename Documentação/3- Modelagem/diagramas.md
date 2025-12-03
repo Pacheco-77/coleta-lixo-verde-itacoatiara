@@ -10,3 +10,8 @@ O diagrama de classes descreve a estrutura estática do sistema, apresentando su
 
 <img width="1320" height="1043" alt="Diagrama de Classe drawio" src="https://github.com/user-attachments/assets/7e1cba3b-a334-4edc-b33b-1c2fc914b00a" />
 
+## Diagrama de Atividades
+
+O diagrama de atividades apresentado abaixo representa o fluxo operacional do Sistema de Coleta de Lixo Verde de Itacoatiara-AM. Ele descreve de forma visual as ações realizadas pelos três tipos de usuários — cidadão, coletor e gestor — evidenciando como cada funcionalidade se conecta dentro do processo geral do aplicativo. O objetivo é facilitar o entendimento do funcionamento do sistema e apoiar a documentação do projeto.
+
+<img width="798" height="931" alt="Diagrama de Atividades1 drawio (1)" src="https://github.com/user-attachments/assets/f3f9a558-ef74-42f0-a7fe-f886f337e433" />
