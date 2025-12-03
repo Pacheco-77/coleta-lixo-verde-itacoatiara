@@ -1,11 +1,11 @@
 ## Plano de Trabalho
 | **Nome do Projeto** | Sistema de Coleta de Lixo Verde – Itacoatiara-AM |
 |--------------------|--------------------------------------------------|
-| **Codinome** | VerdeColeta |
+| **Codinome** | Coleta Verde|
 | **Versão** | 1.0 |
 | **Status** | Em desenvolvimento |
 | **Número de Controle** | 2025-001 |
-| **Executor Principal** | Equipe VerdeColeta |
+| **Executor Principal** | Equipe Coleta Verde |
 | **Coordenador do Projeto** | Prof. Antonio Alberto |
 
 
