@@ -1,3 +1,14 @@
+## Plano de Trabalho
+| **Nome do Projeto** | Sistema de Coleta de Lixo Verde – Itacoatiara-AM |
+|--------------------|--------------------------------------------------|
+| **Codinome** | VerdeColeta |
+| **Versão** | 1.0 |
+| **Status** | Em desenvolvimento |
+| **Número de Controle** | 2025-001 |
+| **Executor Principal** | Equipe VerdeColeta |
+| **Coordenador do Projeto** | Prof. Antonio Alberto |
+
+
 ## CONTEXTUALIZAÇÃO DO PROBLEMA
 
 O município de Itacoatiara-AM realiza a coleta de lixo verde com base em um cronograma semanal destinado aos bairros. Apesar disso, o serviço apresenta falhas frequentes, especialmente em regiões mais afastadas do centro, onde o tempo de resposta tende a ser maior. Como consequência, resíduos vegetais — como galhos e folhas — permanecem acumulados por longos períodos em vias públicas.
