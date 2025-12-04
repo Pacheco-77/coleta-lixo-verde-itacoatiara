@@ -15,3 +15,9 @@ O diagrama de classes descreve a estrutura estática do sistema, apresentando su
 O diagrama de atividades apresentado abaixo representa o fluxo operacional do Sistema de Coleta de Lixo Verde de Itacoatiara-AM. Ele descreve de forma visual as ações realizadas pelos três tipos de usuários — cidadão, coletor e gestor — evidenciando como cada funcionalidade se conecta dentro do processo geral do aplicativo. O objetivo é facilitar o entendimento do funcionamento do sistema e apoiar a documentação do projeto.
 
 <img width="798" height="931" alt="Diagrama de Atividades1 drawio (1)" src="https://github.com/user-attachments/assets/f3f9a558-ef74-42f0-a7fe-f886f337e433" />
+
+## Diagrama de Sequência 
+
+### Cadastro de Item de Lixo Verde (Cidadão)
+
+<img width="1045" height="593" alt="Cad Item de Lixo Verde (Cidadão)_Seq drawio" src="https://github.com/user-attachments/assets/41adedb4-f7ad-4335-8cca-787fa8ee438b" />
