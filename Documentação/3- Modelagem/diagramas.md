@@ -4,11 +4,15 @@ Os diagramas de caso de uso representam as interações entre os usuários do si
 
 <img width="1126" height="614" alt="Diagrama de Casos de Uso" src="https://github.com/user-attachments/assets/8d6fab8c-a99b-4a9b-b16a-702428b83491" />
 
+----
+
 ## Diagrama de Classe
 
 O diagrama de classes descreve a estrutura estática do sistema, apresentando suas classes, atributos, métodos e relacionamentos. Esse modelo é fundamental para o planejamento da implementação, pois fornece a base conceitual da arquitetura do software, garantindo organização, reutilização e consistência no desenvolvimento do sistema de coleta de lixo verde.
 
 <img width="1320" height="1043" alt="Diagrama de Classe drawio" src="https://github.com/user-attachments/assets/7e1cba3b-a334-4edc-b33b-1c2fc914b00a" />
+
+---- 
 
 ## Diagrama de Atividades
 
@@ -42,5 +46,20 @@ O diagrama de atividades apresentado abaixo representa o fluxo operacional do Si
 ### Geração de Relatórios (Gestor)
 <img width="1125" height="545" alt="Geração de Relatórios_Seq drawio" src="https://github.com/user-attachments/assets/93b857cd-22cf-4f4a-9448-33bb51131b4e" />
 
+---- 
 
+## Diagrama de Estado
 
+### Diagrama de Estados Geral -  Sistema como um todo
+<img width="2714" height="748" alt="Diagrama de Estado  drawio" src="https://github.com/user-attachments/assets/fc401ce1-efb6-4a25-a7a5-ec6868221c3e" />
+
+## Usuário Cidadão
+<img width="1676" height="561" alt="Estado_Cidadão drawio" src="https://github.com/user-attachments/assets/12b2ade0-7220-4947-a191-0296b9c40227" />
+
+## Usuário Coletor
+
+<img width="362" height="586" alt="Estado_Coletor drawio" src="https://github.com/user-attachments/assets/9425df91-337e-4eb0-8641-6e5deaae9f22" />
+
+## Usuário Gestor
+
+<img width="958" height="445" alt="Estado_Gestor drawio" src="https://github.com/user-attachments/assets/901465bb-a6fa-4816-bbc2-9a7f98c1664c" />
