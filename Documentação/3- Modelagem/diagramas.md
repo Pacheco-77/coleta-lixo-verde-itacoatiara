@@ -29,17 +29,18 @@ O diagrama de atividades apresentado abaixo representa o fluxo operacional do Si
 
 ### Registro de Denúncia de Descarte Irregular
 
-
+<img width="1455" height="701" alt="Denúncia de Descarte Irregular_Seq drawio" src="https://github.com/user-attachments/assets/664ccbe0-83be-418b-9772-6bba7fc9125d" />
 
 ### Coletor Marca Coleta Realizada
 
+<img width="1593" height="610" alt="Coletor marca coleta como realizada_Seq drawio" src="https://github.com/user-attachments/assets/b9917fdc-7543-4e08-93f0-8a1aaff1c652" />
 
 ### Gestor Gerencia Usuários
 <img width="926" height="772" alt="Gestor Gerencia Usuários_Seq drawio" src="https://github.com/user-attachments/assets/68b64316-7d54-42c7-856d-c1aa41a572fa" />
 
 
 ### Geração de Relatórios (Gestor)
+<img width="1125" height="545" alt="Geração de Relatórios_Seq drawio" src="https://github.com/user-attachments/assets/93b857cd-22cf-4f4a-9448-33bb51131b4e" />
 
 
-### 
 
