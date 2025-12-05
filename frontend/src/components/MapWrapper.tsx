@@ -66,8 +66,10 @@ const MapWrapper = memo(function MapWrapper({ center, zoom, children }: MapWrapp
         style={{ height: '100%', width: '100%' }}
         scrollWheelZoom={true}
         zoomControl={true}
-        whenCreated={(map) => {
-          mapInstanceRef.current = map;
+        ref={(mapInstance) => {
+          if (mapInstance && !mapInstanceRef.current) {
+            mapInstanceRef.current = mapInstance;
+          }
         }}
       >
         {children}
