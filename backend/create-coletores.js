@@ -1,7 +1,6 @@
 // Script para criar coletores no banco de produção
 require('dotenv').config();
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
@@ -34,9 +33,8 @@ async function createColetores() {
     });
     console.log('🗑️  Coletores de teste antigos removidos');
 
-    // Hash da senha: Coletor@123
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash('Coletor@123', salt);
+    // A senha será hasheada automaticamente pelo pre-save hook do model
+    const plainPassword = 'Coletor@123';
 
     const now = new Date();
 
@@ -44,7 +42,7 @@ async function createColetores() {
     const coletor1 = await User.create({
       name: 'João Silva',
       email: 'coletor1@teste.com',
-      password: hashedPassword,
+      password: plainPassword,
       role: 'coletor',
       phone: '(92) 98765-4321',
       isActive: true,
@@ -58,7 +56,7 @@ async function createColetores() {
     const coletor2 = await User.create({
       name: 'Maria Santos',
       email: 'coletor2@teste.com',
-      password: hashedPassword,
+      password: plainPassword,
       role: 'coletor',
       phone: '(92) 98765-4322',
       isActive: true,
@@ -72,7 +70,7 @@ async function createColetores() {
     const coletor3 = await User.create({
       name: 'Pedro Costa',
       email: 'coletor3@teste.com',
-      password: hashedPassword,
+      password: plainPassword,
       role: 'coletor',
       phone: '(92) 98765-4323',
       isActive: true,
