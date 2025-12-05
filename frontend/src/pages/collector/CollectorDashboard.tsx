@@ -1,36 +1,12 @@
 import { Link } from 'react-router-dom';
-import { LogOut, MapPin, Package } from 'lucide-react';
-import { useAuthStore } from '@/store/authStore';
-import Button from '@/components/ui/Button';
+import { MapPin, Package } from 'lucide-react';
+import CollectorLayout from '@/components/layout/CollectorLayout';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 
 const CollectorDashboard = () => {
-  const { user, logout } = useAuthStore();
-
-  const handleLogout = () => {
-    logout();
-    window.location.href = '/login';
-  };
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">
-                Olá, {user?.name}!
-              </h1>
-              <p className="text-sm text-gray-600">Painel do Coletor</p>
-            </div>
-            <Button variant="outline" onClick={handleLogout} leftIcon={<LogOut className="h-4 w-4" />}>
-              Sair
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <CollectorLayout>
+      <div>
         <div className="grid md:grid-cols-2 gap-6 mb-8">
           <Link to="/coletor/rota-atual">
             <Card hover className="h-full">
@@ -63,8 +39,8 @@ const CollectorDashboard = () => {
             <p className="text-gray-600">Métricas do coletor serão exibidas aqui</p>
           </CardContent>
         </Card>
-      </main>
-    </div>
+      </div>
+    </CollectorLayout>
   );
 };
 

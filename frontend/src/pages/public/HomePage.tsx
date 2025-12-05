@@ -75,11 +75,15 @@ const HomePage = () => {
               </div>
             </div>
             <nav className="flex items-center gap-4">
-              <Link to="/mapa" className="bg-green-600 text-white font-bold hover:bg-green-500 transition-all px-4 py-2 rounded-lg shadow-md hover:shadow-lg">
-                🗺️ Mapa
+              <Link to="/mapa">
+                <button className="bg-green-600 text-white font-bold hover:bg-green-500 transition-all px-4 py-2 rounded-lg shadow-md hover:shadow-lg">
+                  🗺️ Mapa
+                </button>
               </Link>
-              <Link to="/mapa-coleta" className="bg-green-600 text-white font-bold hover:bg-green-500 transition-all px-4 py-2 rounded-lg shadow-md hover:shadow-lg">
-                📍 Mapa de Coleta
+              <Link to="/mapa-coleta">
+                <button className="bg-green-600 text-white font-bold hover:bg-green-500 transition-all px-4 py-2 rounded-lg shadow-md hover:shadow-lg">
+                  📍 Mapa de Coleta
+                </button>
               </Link>
               <Link to="/login">
                 <Button variant="outline" className="bg-white !text-green-700 border-2 border-white hover:bg-green-50 font-semibold">

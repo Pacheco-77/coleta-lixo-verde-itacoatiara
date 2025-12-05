@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, MapPin, Camera, Loader2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { MapPin, Camera, Loader2 } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import { useMutation } from '@tanstack/react-query';
 import { citizenService } from '@/services/citizenService';
 import { toast } from 'sonner';
+import CitizenLayout from '@/components/layout/CitizenLayout';
 
 const NewCollectionPage = () => {
   const navigate = useNavigate();
@@ -130,18 +131,8 @@ const NewCollectionPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Link to="/usuario/dashboard">
-            <Button variant="outline" leftIcon={<ArrowLeft className="h-4 w-4" />}>
-              Voltar
-            </Button>
-          </Link>
-        </div>
-      </header>
-
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <CitizenLayout>
+      <div className="max-w-3xl mx-auto">
         <Card>
           <CardHeader>
             <CardTitle>Agendar Nova Coleta de Lixo Verde</CardTitle>
@@ -402,8 +393,8 @@ const NewCollectionPage = () => {
             </form>
           </CardContent>
         </Card>
-      </main>
-    </div>
+      </div>
+    </CitizenLayout>
   );
 };
 

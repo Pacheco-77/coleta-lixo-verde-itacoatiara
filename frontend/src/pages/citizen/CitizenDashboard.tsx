@@ -1,46 +1,21 @@
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { Plus, Calendar, MapPin, Package, LogOut } from 'lucide-react';
-import { useAuthStore } from '@/store/authStore';
+import { Plus, Calendar, MapPin, Package } from 'lucide-react';
 import { citizenService } from '@/services/citizenService';
-import Button from '@/components/ui/Button';
+import CitizenLayout from '@/components/layout/CitizenLayout';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Loading from '@/components/ui/Loading';
 
 const CitizenDashboard = () => {
-  const { user, logout } = useAuthStore();
 
   const { data: collections, isLoading } = useQuery({
     queryKey: ['my-collections'],
     queryFn: () => citizenService.getMyCollectionPoints({ limit: 5 }),
   });
 
-  const handleLogout = () => {
-    logout();
-    window.location.href = '/login';
-  };
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">
-                Olá, {user?.name}!
-              </h1>
-              <p className="text-sm text-gray-600">Bem-vindo ao seu painel</p>
-            </div>
-            <Button variant="outline" onClick={handleLogout} leftIcon={<LogOut className="h-4 w-4" />}>
-              Sair
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <CitizenLayout>
+      <div>
         {/* Quick Actions */}
         <div className="grid md:grid-cols-3 gap-6 mb-8">
           <Link to="/cidadao/nova-coleta">
@@ -124,8 +99,8 @@ const CitizenDashboard = () => {
             )}
           </CardContent>
         </Card>
-      </main>
-    </div>
+      </div>
+    </CitizenLayout>
   );
 };
 
