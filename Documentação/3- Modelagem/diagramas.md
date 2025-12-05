@@ -63,3 +63,14 @@ O diagrama de atividades apresentado abaixo representa o fluxo operacional do Si
 ## Usuário Gestor
 
 <img width="958" height="445" alt="Estado_Gestor drawio" src="https://github.com/user-attachments/assets/901465bb-a6fa-4816-bbc2-9a7f98c1664c" />
+
+-----
+## Diagrama de Componentes
+
+<img width="1081" height="490" alt="Diagrama de Componentes drawio" src="https://github.com/user-attachments/assets/c69fa6e0-af8b-4f86-b82b-ca1a15b2dda0" />
+
+-----
+
+## Diagrama de Implantação
+
+<img width="2625" height="1134" alt="Diagrama de Implantação drawio" src="https://github.com/user-attachments/assets/5d87da7b-72b3-4d2b-868a-092af9408ec5" />
