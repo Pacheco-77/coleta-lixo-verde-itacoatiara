@@ -39,18 +39,18 @@ const DropdownMenu = ({ items, onItemClick, level = 0, colorScheme = 'green' }: 
   // Classes de cor baseadas no esquema
   const colorClasses = {
     green: {
-      active: 'bg-green-600 text-white font-medium',
-      inactive: 'text-white hover:bg-green-600/50',
+      active: 'bg-green-600 !text-white font-medium',
+      inactive: '!text-white hover:bg-green-600/50',
       submenuBg: 'bg-green-700 border-green-800',
     },
     blue: {
-      active: 'bg-blue-600 text-white font-medium',
-      inactive: 'text-white hover:bg-blue-600/50',
+      active: 'bg-blue-600 !text-white font-medium',
+      inactive: '!text-white hover:bg-blue-600/50',
       submenuBg: 'bg-blue-700 border-blue-800',
     },
     orange: {
-      active: 'bg-orange-500 text-white font-medium',
-      inactive: 'text-white hover:bg-orange-500/50',
+      active: 'bg-orange-500 !text-white font-medium',
+      inactive: '!text-white hover:bg-orange-500/50',
       submenuBg: 'bg-orange-600 border-orange-700',
     },
   };
