@@ -109,7 +109,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-16 left-0 bottom-0 w-64 bg-white border-r border-gray-200 z-20 transition-transform duration-300 ${
+        className={`fixed top-16 left-0 bottom-0 w-64 bg-green-700 border-r border-green-800 z-20 transition-transform duration-300 ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } lg:translate-x-0`}
       >
@@ -125,8 +125,8 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                 onClick={() => setSidebarOpen(false)}
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                   isActive
-                    ? 'bg-green-50 text-green-700 font-medium'
-                    : 'text-gray-700 hover:bg-gray-50'
+                    ? 'bg-green-600 text-white font-medium'
+                    : 'text-white hover:bg-green-600/50'
                 }`}
               >
                 <Icon className="w-5 h-5" />
