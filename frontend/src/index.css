@@ -50,6 +50,15 @@
     @apply text-secondary-500 hover:text-secondary-700;
   }
   
+  /* Links dentro de sidebars - SEMPRE BRANCO */
+  aside a,
+  aside a:not(.btn),
+  aside span,
+  nav a,
+  .sidebar-link {
+    @apply !text-white;
+  }
+  
   /* Cards e fundos */
   .card-bg {
     @apply bg-cinza-claro border border-verde-medio/20;
