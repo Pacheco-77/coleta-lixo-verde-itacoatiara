@@ -30,7 +30,7 @@ const register = async (req, res, next) => {
     }
 
     // Apenas admin pode criar coletores
-    if (role === 'collector' || role === 'admin') {
+    if (role === 'coletor' || role === 'admin') {
       if (!req.user || req.user.role !== 'admin') {
         throw new AppError('Apenas administradores podem criar coletores', 403);
       }
@@ -42,7 +42,7 @@ const register = async (req, res, next) => {
       email,
       password,
       phone,
-      role: role || 'citizen',
+      role: role || 'user',
       address,
       createdBy: req.user?._id,
     });
