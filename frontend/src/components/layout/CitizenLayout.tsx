@@ -1,33 +1,27 @@
-import { ReactNode } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { ReactNode, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { 
-  LayoutDashboard, 
-  Users, 
-  Route as RouteIcon, 
-  FileText, 
-  Newspaper,
+  Home,
+  Plus,
+  Package,
+  MapPin,
   LogOut,
   Menu,
   X,
   Leaf,
-  UserCog,
-  Shield,
-  BarChart3,
-  FileBarChart,
-  TrendingUp
+  Calendar,
+  Bell,
+  MessageSquare
 } from 'lucide-react';
 import { useAuthStore } from '@/store/authStore';
-import { isSpecificAdmin } from '@/types';
 import Button from '@/components/ui/Button';
 import DropdownMenu, { MenuItem } from '@/components/ui/DropdownMenu';
-import { useState } from 'react';
 
-interface AdminLayoutProps {
+interface CitizenLayoutProps {
   children: ReactNode;
 }
 
-const AdminLayout = ({ children }: AdminLayoutProps) => {
-  const location = useLocation();
+const CitizenLayout = ({ children }: CitizenLayoutProps) => {
   const navigate = useNavigate();
   const { user, logout } = useAuthStore();
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -37,71 +31,49 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
     navigate('/login');
   };
 
-  // Verificar se é admin específico
-  const isSpecificAdminUser = user?.email ? isSpecificAdmin(user.email) : false;
-
   const menuItems: MenuItem[] = [
     {
       label: 'Dashboard',
-      icon: LayoutDashboard,
-      path: '/admin/dashboard',
+      icon: Home,
+      path: '/cidadao/dashboard',
       show: true,
     },
     {
-      label: 'Usuários',
-      icon: Users,
+      label: 'Coletas',
+      icon: Package,
       show: true,
       submenu: [
         {
-          label: 'Gerenciar Usuários',
-          icon: UserCog,
-          path: '/admin/usuarios',
+          label: 'Nova Solicitação',
+          icon: Plus,
+          path: '/cidadao/nova-coleta',
           show: true,
         },
         {
-          label: 'Permissões',
-          icon: Shield,
-          path: '/admin/usuarios/permissoes',
+          label: 'Minhas Coletas',
+          icon: Calendar,
+          path: '/cidadao/minhas-coletas',
           show: true,
         },
       ],
     },
     {
-      label: 'Rotas',
-      icon: RouteIcon,
-      path: '/admin/rotas',
+      label: 'Mapa',
+      icon: MapPin,
+      path: '/mapa',
       show: true,
     },
     {
-      label: 'Relatórios',
-      icon: FileText,
+      label: 'Denúncias',
+      icon: MessageSquare,
+      path: '/cidadao/denuncias',
       show: true,
-      submenu: [
-        {
-          label: 'Visão Geral',
-          icon: BarChart3,
-          path: '/admin/relatorios',
-          show: true,
-        },
-        {
-          label: 'Análise de Dados',
-          icon: FileBarChart,
-          path: '/admin/relatorios/analise',
-          show: true,
-        },
-        {
-          label: 'Estatísticas',
-          icon: TrendingUp,
-          path: '/admin/relatorios/estatisticas',
-          show: true,
-        },
-      ],
     },
     {
-      label: 'Notícias',
-      icon: Newspaper,
-      path: '/admin/noticias',
-      show: isSpecificAdminUser, // Apenas admins específicos
+      label: 'Notificações',
+      icon: Bell,
+      path: '/cidadao/notificacoes',
+      show: true,
     },
   ];
 
@@ -117,11 +89,11 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
             >
               {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
-            <Link to="/admin/dashboard" className="flex items-center gap-2">
+            <Link to="/cidadao/dashboard" className="flex items-center gap-2">
               <Leaf className="w-8 h-8 text-green-600" />
               <div>
                 <h1 className="text-lg font-bold text-gray-900">Coleta Verde</h1>
-                <p className="text-xs text-gray-500">Painel Admin</p>
+                <p className="text-xs text-gray-500">Portal do Cidadão</p>
               </div>
             </Link>
           </div>
@@ -145,7 +117,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-16 left-0 bottom-0 w-64 bg-green-700 border-r border-green-800 z-20 transition-transform duration-300 overflow-y-auto ${
+        className={`fixed top-16 left-0 bottom-0 w-64 bg-blue-700 border-r border-blue-800 z-20 transition-transform duration-300 overflow-y-auto ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } lg:translate-x-0`}
       >
@@ -153,6 +125,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
           <DropdownMenu 
             items={menuItems} 
             onItemClick={() => setSidebarOpen(false)}
+            colorScheme="blue"
           />
         </nav>
       </aside>
@@ -173,4 +146,4 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   );
 };
 
-export default AdminLayout;
+export default CitizenLayout;

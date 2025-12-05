@@ -1,33 +1,28 @@
-import { ReactNode } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { ReactNode, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { 
-  LayoutDashboard, 
-  Users, 
-  Route as RouteIcon, 
-  FileText, 
-  Newspaper,
+  Home,
+  MapPin,
+  Package,
+  Route as RouteIcon,
   LogOut,
   Menu,
   X,
   Leaf,
-  UserCog,
-  Shield,
+  CheckCircle,
+  Navigation,
   BarChart3,
-  FileBarChart,
-  TrendingUp
+  AlertCircle
 } from 'lucide-react';
 import { useAuthStore } from '@/store/authStore';
-import { isSpecificAdmin } from '@/types';
 import Button from '@/components/ui/Button';
 import DropdownMenu, { MenuItem } from '@/components/ui/DropdownMenu';
-import { useState } from 'react';
 
-interface AdminLayoutProps {
+interface CollectorLayoutProps {
   children: ReactNode;
 }
 
-const AdminLayout = ({ children }: AdminLayoutProps) => {
-  const location = useLocation();
+const CollectorLayout = ({ children }: CollectorLayoutProps) => {
   const navigate = useNavigate();
   const { user, logout } = useAuthStore();
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -37,71 +32,68 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
     navigate('/login');
   };
 
-  // Verificar se é admin específico
-  const isSpecificAdminUser = user?.email ? isSpecificAdmin(user.email) : false;
-
   const menuItems: MenuItem[] = [
     {
       label: 'Dashboard',
-      icon: LayoutDashboard,
-      path: '/admin/dashboard',
+      icon: Home,
+      path: '/coletor/dashboard',
       show: true,
-    },
-    {
-      label: 'Usuários',
-      icon: Users,
-      show: true,
-      submenu: [
-        {
-          label: 'Gerenciar Usuários',
-          icon: UserCog,
-          path: '/admin/usuarios',
-          show: true,
-        },
-        {
-          label: 'Permissões',
-          icon: Shield,
-          path: '/admin/usuarios/permissoes',
-          show: true,
-        },
-      ],
     },
     {
       label: 'Rotas',
       icon: RouteIcon,
-      path: '/admin/rotas',
-      show: true,
-    },
-    {
-      label: 'Relatórios',
-      icon: FileText,
       show: true,
       submenu: [
         {
-          label: 'Visão Geral',
-          icon: BarChart3,
-          path: '/admin/relatorios',
+          label: 'Rota Atual',
+          icon: Navigation,
+          path: '/coletor/rota-atual',
           show: true,
         },
         {
-          label: 'Análise de Dados',
-          icon: FileBarChart,
-          path: '/admin/relatorios/analise',
-          show: true,
-        },
-        {
-          label: 'Estatísticas',
-          icon: TrendingUp,
-          path: '/admin/relatorios/estatisticas',
+          label: 'Histórico',
+          icon: Package,
+          path: '/coletor/historico',
           show: true,
         },
       ],
     },
     {
-      label: 'Notícias',
-      icon: Newspaper,
-      path: '/admin/noticias',
-      show: isSpecificAdminUser, // Apenas admins específicos
+      label: 'Check-in',
+      icon: CheckCircle,
+      path: '/coletor/checkin',
+      show: true,
+    },
+    {
+      label: 'Localização',
+      icon: MapPin,
+      path: '/coletor/localizacao',
+      show: true,
+    },
+    {
+      label: 'Desempenho',
+      icon: BarChart3,
+      show: true,
+      submenu: [
+        {
+          label: 'Minhas Métricas',
+          icon: BarChart3,
+          path: '/coletor/metricas',
+          show: true,
+        },
+        {
+          label: 'Relatórios',
+          icon: Package,
+          path: '/coletor/relatorios',
+          show: true,
+        },
+      ],
+    },
+    {
+      label: 'Problemas',
+      icon: AlertCircle,
+      path: '/coletor/problemas',
+      show: true,
     },
   ];
 
@@ -117,11 +109,11 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
             >
               {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
-            <Link to="/admin/dashboard" className="flex items-center gap-2">
+            <Link to="/coletor/dashboard" className="flex items-center gap-2">
               <Leaf className="w-8 h-8 text-green-600" />
               <div>
                 <h1 className="text-lg font-bold text-gray-900">Coleta Verde</h1>
-                <p className="text-xs text-gray-500">Painel Admin</p>
+                <p className="text-xs text-gray-500">Portal do Coletor</p>
               </div>
             </Link>
           </div>
@@ -145,7 +137,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-16 left-0 bottom-0 w-64 bg-green-700 border-r border-green-800 z-20 transition-transform duration-300 overflow-y-auto ${
+        className={`fixed top-16 left-0 bottom-0 w-64 bg-orange-600 border-r border-orange-700 z-20 transition-transform duration-300 overflow-y-auto ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } lg:translate-x-0`}
       >
@@ -153,6 +145,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
           <DropdownMenu 
             items={menuItems} 
             onItemClick={() => setSidebarOpen(false)}
+            colorScheme="orange"
           />
         </nav>
       </aside>
@@ -173,4 +166,4 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   );
 };
 
-export default AdminLayout;
+export default CollectorLayout;
