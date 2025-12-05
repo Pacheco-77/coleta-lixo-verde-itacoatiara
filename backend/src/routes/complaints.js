@@ -15,7 +15,7 @@ const {
 const { authenticate } = require('../middleware/auth');
 const { requireRole } = require('../middleware/roleCheck');
 const { body } = require('express-validator');
-const { validate } = require('../middleware/validation');
+const { handleValidationErrors } = require('../middleware/validation');
 
 // Rotas públicas/autenticadas
 router.post(
@@ -26,23 +26,23 @@ router.post(
     body('title').notEmpty().withMessage('Título é obrigatório').isLength({ max: 200 }),
     body('description').notEmpty().withMessage('Descrição é obrigatória').isLength({ max: 1000 }),
     body('location.coordinates').isArray().withMessage('Coordenadas são obrigatórias'),
-    validate
   ],
+  handleValidationErrors,
   createComplaint
 );
 
 router.get('/my', authenticate, getMyComplaints);
+
+// Rotas administrativas (devem vir antes de /:id)
+router.get('/admin/statistics', authenticate, requireRole('admin'), getComplaintStatistics);
+router.get('/admin/all', authenticate, requireRole('admin'), getAllComplaints);
+router.put('/admin/:id', authenticate, requireRole('admin'), updateComplaint);
+router.patch('/admin/:id/status', authenticate, requireRole('admin'), changeComplaintStatus);
+router.post('/admin/:id/resolve', authenticate, requireRole('admin'), resolveComplaint);
+router.post('/admin/:id/reject', authenticate, requireRole('admin'), rejectComplaint);
+router.delete('/admin/:id', authenticate, requireRole('admin'), deleteComplaint);
+
+// Rota dinâmica deve vir por último
 router.get('/:id', authenticate, getComplaintById);
-
-// Rotas administrativas
-router.use('/admin', authenticate, requireRole('admin'));
-
-router.get('/admin/statistics', getComplaintStatistics);
-router.get('/admin/all', getAllComplaints);
-router.put('/admin/:id', updateComplaint);
-router.patch('/admin/:id/status', changeComplaintStatus);
-router.post('/admin/:id/resolve', resolveComplaint);
-router.post('/admin/:id/reject', rejectComplaint);
-router.delete('/admin/:id', deleteComplaint);
 
 module.exports = router;
