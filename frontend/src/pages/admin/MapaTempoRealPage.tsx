@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -150,8 +150,8 @@ export default function MapaTempoReal() {
     );
   }
 
-  // Centro de Itacoatiara - useMemo para evitar re-renders
-  const center: [number, number] = useMemo(() => [-3.1431, -58.4442], []);
+  // Centro de Itacoatiara
+  const center: [number, number] = [-3.1431, -58.4442];
 
   return (
     <div className="flex flex-col" style={{ height: 'calc(100vh - 200px)' }}>

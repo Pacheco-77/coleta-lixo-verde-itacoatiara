@@ -1,4 +1,4 @@
-import { useEffect, useRef, useMemo } from 'react';
+import { useEffect, useRef } from 'react';
 import { MapContainer } from 'react-leaflet';
 import L from 'leaflet';
 
@@ -16,12 +16,12 @@ export default function MapWrapper({ center, zoom, children }: MapWrapperProps) 
   const mapInstanceRef = useRef<L.Map | null>(null);
   const hasInitializedRef = useRef(false);
   
-  // ID único fixo para este componente - nunca muda
-  const mapId = useMemo(() => `map-${Math.random().toString(36).substr(2, 9)}`, []);
+  // ID único fixo - usa useRef ao invés de useMemo para não violar regras dos Hooks
+  const mapIdRef = useRef(`map-${Math.random().toString(36).substr(2, 9)}`);
   
-  // Center e zoom fixos - nunca mudam após primeira renderização
-  const initialCenter = useMemo(() => center, []);
-  const initialZoom = useMemo(() => zoom, []);
+  // Center e zoom iniciais - salva na primeira renderização
+  const initialCenterRef = useRef(center);
+  const initialZoomRef = useRef(zoom);
 
   useEffect(() => {
     hasInitializedRef.current = true;
@@ -43,7 +43,7 @@ export default function MapWrapper({ center, zoom, children }: MapWrapperProps) 
   // Previne re-renders desnecessários
   if (hasInitializedRef.current && mapInstanceRef.current) {
     // Atualiza a view do mapa se center/zoom mudarem, mas sem re-render
-    if (center[0] !== initialCenter[0] || center[1] !== initialCenter[1] || zoom !== initialZoom) {
+    if (center[0] !== initialCenterRef.current[0] || center[1] !== initialCenterRef.current[1] || zoom !== initialZoomRef.current) {
       try {
         mapInstanceRef.current.setView(center, zoom, { animate: true });
       } catch (e) {
@@ -53,10 +53,10 @@ export default function MapWrapper({ center, zoom, children }: MapWrapperProps) 
   }
 
   return (
-    <div className="w-full h-full" id={mapId}>
+    <div className="w-full h-full" id={mapIdRef.current}>
       <MapContainer
-        center={initialCenter}
-        zoom={initialZoom}
+        center={initialCenterRef.current}
+        zoom={initialZoomRef.current}
         style={{ height: '100%', width: '100%' }}
         scrollWheelZoom={true}
         zoomControl={true}
