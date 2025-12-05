@@ -170,6 +170,10 @@ app.get('/', (req, res) => {
   });
 });
 
+// Servir arquivos estáticos (uploads)
+const uploadsPath = require('path').join(__dirname, '../uploads');
+app.use('/uploads', express.static(uploadsPath));
+
 // Importar rotas
 const authRoutes = require('./routes/auth');
 const citizenRoutes = require('./routes/citizen');
@@ -178,6 +182,8 @@ const adminRoutes = require('./routes/admin');
 const publicRoutes = require('./routes/public');
 const setupRoutes = require('./routes/setup'); // Rota temporária
 const pontosRoutes = require('./routes/pontos'); // Rotas de pontos de coleta
+const complaintsRoutes = require('./routes/complaints'); // Rotas de denúncias
+const uploadRoutes = require('./routes/upload'); // Upload de arquivos
 
 // Rotas da API
 app.use('/api/auth', authLimiter, authRoutes);
@@ -185,6 +191,8 @@ app.use('/api/public', publicRoutes);
 app.use('/api/citizen', citizenRoutes);
 app.use('/api/collector', collectorRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/complaints', complaintsRoutes); // Denúncias
+app.use('/api/upload', uploadRoutes); // Upload de arquivos
 app.use('/api/setup', setupRoutes); // Rota temporária - REMOVER APÓS USAR!
 app.use('/api', pontosRoutes); // Rotas públicas de pontos de coleta
 
