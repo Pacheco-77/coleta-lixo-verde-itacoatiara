@@ -109,7 +109,7 @@ const CollectorLayout = ({ children }: CollectorLayoutProps) => {
             >
               {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
-            <Link to="/coletor/dashboard" className="flex items-center gap-2">
+            <Link to="/coletor/dashboard" className="flex items-center gap-2 no-underline">
               <Leaf className="w-8 h-8 text-green-600" />
               <div>
                 <h1 className="text-lg font-bold text-gray-900">Coleta Verde</h1>
