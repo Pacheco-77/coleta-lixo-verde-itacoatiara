@@ -74,3 +74,7 @@ O diagrama de atividades apresentado abaixo representa o fluxo operacional do Si
 ## Diagrama de Implantação
 
 <img width="2625" height="1134" alt="Diagrama de Implantação drawio" src="https://github.com/user-attachments/assets/5d87da7b-72b3-4d2b-868a-092af9408ec5" />
+
+-----
+## Diagrama de Entidade e Relacionamento
+<img width="1363" height="1187" alt="Diagrama ER drawio" src="https://github.com/user-attachments/assets/f7ab2367-579d-4a94-936f-038541abf876" />
