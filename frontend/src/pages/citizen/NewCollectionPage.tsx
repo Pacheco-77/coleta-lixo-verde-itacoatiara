@@ -5,7 +5,7 @@ import Button from '@/components/ui/Button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import { useMutation } from '@tanstack/react-query';
 import { citizenService } from '@/services/citizenService';
-import { toast } from 'react-hot-toast';
+import { toast } from 'sonner';
 
 const NewCollectionPage = () => {
   const navigate = useNavigate();
