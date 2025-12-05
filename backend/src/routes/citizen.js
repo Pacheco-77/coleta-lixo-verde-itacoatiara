@@ -22,7 +22,7 @@ router.get('/contact', getContactInfo);
 
 // Rotas privadas (requerem autenticação de cidadão)
 router.use(authenticate);
-router.use(requireRole('citizen'));
+router.use(requireRole('user'));
 
 router.post('/collection-points', registerCollectionPoint);
 router.get('/collection-points', getMyCollectionPoints);

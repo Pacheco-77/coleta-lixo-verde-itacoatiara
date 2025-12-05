@@ -15,7 +15,7 @@ const { requireRole } = require('../middleware/roleCheck');
 
 // Todas as rotas requerem autenticação de coletor
 router.use(authenticate);
-router.use(requireRole('collector'));
+router.use(requireRole('coletor'));
 
 // Rotas de rota atual
 router.get('/current-route', getCurrentRoute);
