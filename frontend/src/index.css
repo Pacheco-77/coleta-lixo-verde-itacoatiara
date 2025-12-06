@@ -59,7 +59,7 @@
     @apply !text-white;
   }
   
-  /* Links de logo no header - sem cor de link */
+  /* Links de logo no header - herda cor dos filhos sem underline */
   .no-underline {
     color: currentColor !important;
     text-decoration: none !important;
